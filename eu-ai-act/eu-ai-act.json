@@ -1,0 +1,211 @@
+{
+  "contract_version": "standards.sgit.ai/instrument/v1",
+  "generated": "2026-08-24",
+  "instrument": {
+    "slug": "eu-ai-act",
+    "title": "EU AI Act",
+    "kind": "LAW",
+    "issuer": "European Parliament and Council of the European Union",
+    "identifier": "Regulation (EU) 2024/1689",
+    "eli": "http://data.europa.eu/eli/reg/2024/1689/oj",
+    "amendments_composed": [
+      {
+        "identifier": "Regulation (EU) 2026/1744",
+        "in_force_from": "2026-07-27",
+        "modelled_as": "a first-class Amendment node, composed into the text"
+      }
+    ],
+    "official_consolidation_exists": false,
+    "composition_warning": "This is an UNOFFICIAL composed text. No official consolidated version of Regulation (EU) 2024/1689 as amended has been published. Label it as a composition wherever it is used.",
+    "republishable": true,
+    "republishable_basis": "EU legislative texts are freely reusable; source is official Formex XML from CELLAR"
+  },
+  "provenance": {
+    "source_format": "Formex XML",
+    "source_authority": "CELLAR (Publications Office of the European Union)",
+    "parsing": "deterministic; every node carries a SHA-256 of the retrieved bytes",
+    "known_weaknesses": [
+      "Article-level readings and the operator question set are derived from SECONDARY sources rather than a clause-by-clause reading of the operative text. Re-derivation is required before any citation here is relied on.",
+      "The vault has 2 commits and carries no amendment-over-time history; 2026/1744 is composed in rather than tracked as a change.",
+      "The Article 99 third penalty tier is internally disputed (1% vs 1.5%) and is deliberately not published."
+    ]
+  },
+  "graph": {
+    "nodes": 1523,
+    "edges": 1944,
+    "articles": 113,
+    "paragraphs": 500,
+    "points": 417,
+    "recitals": 180,
+    "annexes": 13,
+    "definitions": 68
+  },
+  "vault": {
+    "name": "Regulation Graph",
+    "id": "73heuprz",
+    "files": 207,
+    "size": "14.9 MB",
+    "commits": 2,
+    "read_key": "sgit_rk1_c004daae386e8d17fa648884acc527018bd4ea1116ad673fb2f1b068011695c9",
+    "credential_format": "<readkey>:<vaultid>",
+    "viewer": "https://dev.vault.sgraph.ai/",
+    "landing": "https://sgit.ai/demos/vaults/regulation-graph/index.html",
+    "public_md": true,
+    "write_key": "never published anywhere, ever \u2014 read keys are a capability handed out on purpose and cannot become write access",
+    "dist": {
+      "zip": null,
+      "sqlite": null,
+      "note": "not built \u2014 no published vault on this estate offers a file export yet"
+    }
+  },
+  "citation_scheme": {
+    "url": "https://standards.sgit.ai/<instrument>/provisions/<alias>.html",
+    "canonical_id": "positional_hash",
+    "positional_hash_derivation": "sha256('<instrument-slug>/<alias>') truncated to 16 hex characters",
+    "alias_form": "zero-padded, e.g. art-026-para-05, art-009-para-05-pt-d, rec-060, anx-III-pt-05-b",
+    "note": "The alias is a projection of the positional hash. If the instrument renumbers, the alias moves and the hash does not."
+  },
+  "epistemic_rule": "An agent may report which provision a claim points at. It may not report that a requirement is met. This site produces findings and unanswered questions, never a score, never a pass.",
+  "crosswalks": {
+    "count": 0,
+    "note": "No bridge exists from this instrument to any other. Not to GDPR, NIS2, ISO/IEC 42001 or NIST AI RMF. The design is at /method/crosswalks.html; the bridges are not built."
+  },
+  "provisions": [
+    {
+      "id": "d8fc6df65f292bf3",
+      "alias": "art-026-para-05",
+      "citation": "Regulation (EU) 2024/1689, Article 26(5)",
+      "title": "Suspension and notification",
+      "positional_hash": "d8fc6df65f292bf3",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": "https://standards.sgit.ai/eu-ai-act/provisions/art-026-para-05.html",
+      "reading": "A dual obligation. Suspension without notification is not compliance, and notification without suspension is not either \u2014 which is why a checklist row loses half of it.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "2d9c2cb6ef0892ae",
+      "alias": "art-026-para-06",
+      "citation": "Regulation (EU) 2024/1689, Article 26(6)",
+      "title": "Log retention",
+      "positional_hash": "2d9c2cb6ef0892ae",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": "https://standards.sgit.ai/eu-ai-act/provisions/art-026-para-06.html",
+      "reading": "A retention obligation with a stated minimum, recorded in the project's material as at least six months. Assessment against it is arithmetic rather than judgement \u2014 which makes it defensible and unrepresentative.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "577915560498b17d",
+      "alias": "art-009-para-05",
+      "citation": "Regulation (EU) 2024/1689, Article 9(5)",
+      "title": "Residual risk judged to be acceptable",
+      "positional_hash": "577915560498b17d",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": "https://standards.sgit.ai/eu-ai-act/provisions/art-009-para-05.html",
+      "reading": "The obligation to make the judgement is imposed; the standard against which to judge is not supplied. Note the citation precision: the paragraph refers back to 'paragraph 2, point (d)', not to paragraph 2 whole.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "954173f1b7696d1e",
+      "alias": "art-099",
+      "citation": "Regulation (EU) 2024/1689, Article 99",
+      "title": "Penalties",
+      "positional_hash": "954173f1b7696d1e",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": "https://standards.sgit.ai/eu-ai-act/provisions/art-099.html",
+      "reading": "For most undertakings the fine is the higher of the fixed sum or the percentage; for SMEs and start-ups it is the lower of the two. The third tier is disputed internally and is not published.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "c9735ca098495463",
+      "alias": "art-010",
+      "citation": "Regulation (EU) 2024/1689, Article 10",
+      "title": "Data and data governance",
+      "positional_hash": "c9735ca098495463",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": null,
+      "reading": "Subject of the staleness probe that found three states of AI Act text in circulation, including a negotiating draft published as though in force.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "b1150b8acabeb612",
+      "alias": "art-014",
+      "citation": "Regulation (EU) 2024/1689, Article 14",
+      "title": "Human oversight",
+      "positional_hash": "b1150b8acabeb612",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": null,
+      "reading": "The plug question: can a human meaningfully oversee it, intervene in it, and stop it \u2014 and has anyone tested that.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "2119ce227282ff09",
+      "alias": "art-027",
+      "citation": "Regulation (EU) 2024/1689, Article 27",
+      "title": "Fundamental rights impact assessment",
+      "positional_hash": "2119ce227282ff09",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": null,
+      "reading": "In the worked example. The open question there is whether the assessment covers the model version currently in production.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "6e736c512ef25eb5",
+      "alias": "art-040",
+      "citation": "Regulation (EU) 2024/1689, Article 40",
+      "title": "Harmonised standards and presumption of conformity",
+      "positional_hash": "6e736c512ef25eb5",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": null,
+      "reading": "No deliverable currently grants presumption of conformity, because none has been cited in the Official Journal. Both conditions are required and neither is met.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    },
+    {
+      "id": "9ad51485f8ba561b",
+      "alias": "anx-III-pt-05-b",
+      "citation": "Regulation (EU) 2024/1689, Annex III, point 5(b)",
+      "title": "Creditworthiness of natural persons",
+      "positional_hash": "9ad51485f8ba561b",
+      "content_hash": null,
+      "content_hash_note": "not computed \u2014 the operative text has not been re-derived from the authority; see /eu-ai-act/status.html",
+      "text": null,
+      "text_note": "not reproduced on this site pending re-derivation from the operative text. The text is in the vault and at the authority URL.",
+      "page": null,
+      "reading": "The high-risk category the worked example enters through.",
+      "reading_provenance": "secondary \u2014 derived from analysis of the named articles, not from a clause-by-clause reading of the operative text",
+      "crosswalk": []
+    }
+  ],
+  "licence": "CC BY 4.0 for this site's own writing. The instrument text is EU law and freely reusable; see /instruments/index.html#licensing."
+}

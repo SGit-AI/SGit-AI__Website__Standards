@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How a regulation becomes a graph · standards.sgit.ai</title>
+<meta name="description" content="The method layer, built before any instrument: taxonomy and ontology kept apart, paragraph-as-folder storage, two hashes per provision so crosswalks survive amendment, retrieval records as provenance, authority anchoring by deferral — and the acceptance test the method has not yet passed.">
+<link rel="canonical" href="https://standards.sgit.ai/method/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="standards.sgit.ai">
+<meta property="og:url" content="https://standards.sgit.ai/method/index.html">
+<meta property="og:title" content="How a regulation becomes a graph">
+<meta property="og:description" content="Taxonomy and ontology are not the same edge. The paragraph is the hinge. Two hashes per provision — one for the slot, one for what is in it — is what makes a crosswalk survive amendment.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / method</div>
+<h1>How a regulation becomes a graph</h1>
+<p class="lead">This is the page that makes this site more than a link farm, and it is the only content here that is unambiguously the project's own rather than a mapping of somebody else's text. It was built <b>first</b>, before any instrument folder, for three reasons: it already existed in publishable form, it makes instruments two through <em>N</em> cheap, and — given that ISO text cannot legally be republished at all — it is the only material that is <em>itself</em> the product.</p>
+
+<p class="claim">Build the meta layer first. Every instrument built without it is built twice.</p>
+
+<h2 id="shape">The shape of the answer</h2>
+<p>A legal instrument is not a document with structure bolted on. It <em>is</em> a structure — chapters containing articles containing paragraphs containing points — and it carries a second, entirely different structure on top: the concepts it defines, the actors it names, the obligations it creates, and the things it refers out to. <b>Those two structures are not the same kind of thing and must not be modelled as the same kind of edge.</b></p>
+
+<pre class="shell">                    OUTWARD: ontology
+                    concepts, definitions, entities,
+                    obligations, risks, external terms
+                              ^
+                              |
+   UPWARD: taxonomy    [ PARAGRAPH ]    the structural spine
+   bullet -&gt; paragraph -&gt; article -&gt; chapter -&gt; instrument</pre>
+
+<blockquote class="challenge">The failure this avoids is the common one of modelling both as a single graph, where structural containment and semantic relationship become the same kind of edge. Then a query for <em>what this article contains</em> returns concepts, and a query for <em>what this concept relates to</em> returns paragraph numbers, and <b>neither answer is useful.</b></blockquote>
+
+<p>The paragraph is the hinge. It is the unit that is small enough to be a real obligation and large enough to be worth citing, and it is the unit both structures attach to. Everything else in this method follows from putting the paragraph in the middle.</p>
+
+<h2 id="folder">Paragraph as folder</h2>
+<p>The storage design is the model, not a serialisation of it. Every paragraph is a folder; every folder carries its own index; every index carries a hash.</p>
+
+<pre class="shell">structure/
+└── article-026/
+    └── paragraph-05/
+        ├── text.md          -&gt; positional hash + content hash
+        ├── analysis.md      -&gt; cached against the CONTENT hash
+        ├── annotations.json -&gt; cached against the CONTENT hash
+        ├── references.json
+        └── index.json       -&gt; this folder's own index</pre>
+
+<blockquote class="challenge">if the folder has a hash, then we have a master index, and each folder has an index of the items that it has itself… <b>that can be all read and maintained by the other end, but also by code.</b></blockquote>
+
+<p>The property that makes this worth the trouble:</p>
+<pre class="shell">   amendment arrives -&gt; re-hash -&gt; only changed paragraphs reprocess
+   <span class="g">cost scales with CHANGE, not with SIZE</span></pre>
+
+<p>An instrument of 113 articles amended in four places costs four paragraphs of reprocessing, not 113 articles of it. For a corpus whose business argument is <em>“the amendment is the business model”</em>, that is the difference between a living resource and a snapshot that rots.</p>
+
+<h2 id="hashes">Two hashes, and why it is two</h2>
+<p>This is the single most consequential decision in the method, and it is one sentence long: <b>one identity for the slot, one identity for what is in it.</b></p>
+
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th>Positional hash</th><th>Content hash</th></tr></thead>
+  <tbody>
+    <tr><td><b>Derived from</b></td><td>The address in the hierarchy</td><td>The text</td></tr>
+    <tr><td><b>Answers</b></td><td><em>Which provision is this?</em></td><td><em>What does it currently say?</em></td></tr>
+    <tr><td><b>Moves when</b></td><td>Renumbered or relocated</td><td>The wording is amended</td></tr>
+    <tr><td><b>Used for</b></td><td>Deep links, citations, comment anchors, <b>crosswalk attachment</b></td><td>Change detection, cache keys, verification</td></tr>
+    <tr><td><b>Under amendment</b></td><td><b class="yes">Stable</b></td><td><b class="no">Moves</b></td></tr>
+  </tbody>
+</table></div>
+
+<p>A crosswalk mapping attaches to the <b>positional</b> hash and therefore survives revision. Attach a mapping to text and you have a spreadsheet that rots; attach it to a position and you have an artefact that survives amendment <em>and can report that the text underneath it moved</em>. That single decision is the difference between a maintainable multi-standard library and the usual dead mapping spreadsheet. <a href="crosswalks.html#survive">The crosswalk consequence →</a> · <a href="citation.html">how it becomes a URL →</a></p>
+
+<h2 id="provenance">Provenance: the retrieval record</h2>
+<p>A quotation says <em>this is what it says</em>. A citation says <em>this is what it says, this is where I got it, this is when, and here is the hash of exactly the bytes I read</em>. This site only publishes the second kind, and the reason is a finding from the project's own probe of the AI Act in the wild.</p>
+
+<div class="warnbox"><b>Three states of staleness were found, and one of them is worse than stale.</b> A probe of AI Act text as it circulates found current text, superseded text, and — the one that matters — <b><em>a text that never was the law</em></b>: a negotiating draft published as though it were in force. And the corollary that kills the obvious mitigation: <em>“Cross-checking two sources cannot establish currency, since agreement only shows both are old.”</em>
+<p style="margin:.6rem 0 0">Two sources agreeing is not evidence. The retrieval record is, because it names an authority, a moment and a byte sequence you can re-fetch and re-hash.</p></div>
+
+<p>So every instrument vault carries a <code>source/</code> layer holding the retrieved bytes <b>unmodified</b>, a <code>.sha256</code> beside each, and a <code>RETRIEVAL.md</code> recording where, when, by what method and with what response headers. For the EU AI Act that is official Formex XML from CELLAR. <b>For ISO that layer is empty, and <a href="../iso-27001/index.html">the page says why</a>.</b></p>
+
+<h2 id="anchoring">Authority anchoring: defer, don't decide</h2>
+<blockquote class="challenge">the answer to how you know you are linking to the right one is that <b>you do not decide, you defer</b>. An entity reference terminates at the identifier the Union itself publishes for that body rather than at a node we created and named.</blockquote>
+<p>Two consequences worth stating plainly. <b>This site never becomes the authority on what an external body is</b> — it points at the issuer's own identifier, which is both more honest and less work. And multilingual comes close to free for EU instruments, which are published in 24 languages against the same structure:</p>
+<blockquote class="challenge"><b>a concept has one identifier and many labels</b>, one per language, so the concept is language-independent and the word is a projection of it.</blockquote>
+<p>Whether to actually ship that is an open question rather than a plan — it is a real differentiator and also a standing maintenance commitment. <a href="../admin/comms.html#open">Q8 →</a></p>
+
+<h2 id="acceptance">The acceptance test, and it is not passed yet</h2>
+<p>A method that holds exactly one instrument is not a method. The corpus supplies its own test, and this site adopts it as the acceptance criterion for this page:</p>
+<blockquote class="challenge">The practical test is whether <b>the same structure holds an ISO standard, a compliance framework and an internal policy without special cases.</b> If it does, the pipeline is real. If it does not, what exists is an AI Act reader.</blockquote>
+<div class="evbox ev-warn"><span class="evtag">Not yet established</span>
+<p><b>Instrument two is the test; instrument three is the proof. Neither has been run.</b> One instrument is modelled. The structure has never been asked to hold anything that is not an EU regulation — and the ISO case is not merely untested but may be <em>impossible</em> as specified, because the model assumes provision text as a node property and ISO text cannot be stored.</p>
+<p>The result will be published either way. <b>A documented special case is more useful than a claim of generality</b>, and a method that needs one is still a method.</p></div>
+
+<h2 id="prior">Prior art — this is not first</h2>
+<p>A site positioning itself as first in this space would be wrong, and would be caught being wrong. Named, with what each got right:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Prior art</th><th>What it is</th><th>What it got right</th></tr></thead>
+  <tbody>
+    <tr><td><b>NIS2Onto</b></td><td>An ontology of Directive (EU) 2022/2555</td><td>That a directive's obligations are modellable as a formal ontology at all — and it is the closest published precedent to what is done here</td></tr>
+    <tr><td><b>PrivComp-KG</b></td><td>A privacy-compliance knowledge graph</td><td>Compliance as graph traversal rather than document review</td></tr>
+    <tr><td><b>The Maryland GDPR + PCI DSS ontology</b></td><td>An integrated ontology across two instruments</td><td><b>The bridge move itself</b> — two instruments addressing one concept, linked to a common concept node. This is the crosswalk design, already done by somebody else, years earlier</td></tr>
+    <tr><td><b>OSCAL</b> (NIST)</td><td>A machine-readable catalogue format for controls and assessment</td><td>That controls, profiles and assessment results want to be data. Admired from a distance here — <a href="../shipped/index.html">nothing on this site is in OSCAL yet</a></td></tr>
+    <tr><td><b>ClauseMatch</b></td><td>Commercial regulatory-change and mapping software</td><td>That the market for this is real, and that the hard part is maintenance rather than the first mapping</td></tr>
+    <tr><td><b>Akoma Ntoso / AKN4EU, ELI, ECLI, LegalRuleML</b></td><td>Open standards for representing legal documents</td><td>Nearly all of the structural vocabulary. These are the standards for representing standards, and they belong here rather than in an instrument folder</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="pages">The rest of the method</h2>
+<div class="cards">
+  <a class="card" href="grammar.html"><span class="tag">Grammar</span><h3>The node and edge types</h3><p>Seven node types, the amendment layer, and the governance rule that keeps an ontology from sprawling: exhaust the established edge set before proposing a new one.</p><span class="go">Read →</span></a>
+  <a class="card" href="crosswalks.html"><span class="tag">Crosswalks</span><h3>Bridges, not merges</h3><p>Why a bridge degrades honestly and a merge does not, what a bridge's basis and strength have to carry, and the five things that must be true before the crosswalk browser can ship.</p><span class="go">Read →</span></a>
+  <a class="card" href="citation.html"><span class="tag">Citation</span><h3>The permalink scheme</h3><p>No stable citation scheme exists anywhere on this estate today. A standards site that cannot be cited has failed at its one job — so here is the scheme, with a working resolver.</p><span class="go">Read →</span></a>
+  <a class="card" href="ladder.html"><span class="tag">Grounding</span><h3>The grounding ladder</h3><p>Five lines, five rules, and the anti-fabrication argument that justifies the whole architecture.</p><span class="go">Read →</span></a>
+</div>
+
+<div class="pagenav"><a href="../index.html">← Front page</a> <a href="grammar.html">The grammar →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

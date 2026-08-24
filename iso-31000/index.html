@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Release history · standards.sgit.ai</title>
-<meta name="description" content="Every push to dev is a release: validate, verify the version bump, tag, deploy. The version scheme, and what shipped in each release.">
-<link rel="canonical" href="https://standards.sgit.ai/admin/versions.html">
+<title>ISO 31000 — nothing here yet, and why · standards.sgit.ai</title>
+<meta name="description" content="ISO 31000 and ISO/IEC 27005 have zero occurrences in the material behind this site. There is nothing to publish and nothing to adapt, and the risk apparatus that is usually wanted instead lives at risks.sgit.ai.">
+<link rel="canonical" href="https://standards.sgit.ai/iso-31000/index.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -28,13 +28,13 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../instruments/index.html">Every instrument</a>
       <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
       <a class="sl" href="../gdpr/index.html">GDPR</a>
       <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
-      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      <a class="sl here" href="../iso-31000/index.html">ISO 31000</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -62,10 +62,10 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
-      <a class="sl here" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
       <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
       <a class="sl" href="../network/index.html">The network</a>
       <a class="sl" href="../about/participant.html">Where we lose</a>
@@ -78,30 +78,33 @@
 
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / admin / versions</div>
-<h1>Release history</h1>
-<p class="lead">Every push to <code>dev</code> is a release: CI validates the site, verifies the version bump, tags the commit <code>v{release}.{major}.{minor}</code>, and deploys to GitHub Pages. The version is owned by <code>admin/build/version.txt</code> and must agree with the release commit's subject. <a href="index.html">The pipeline in detail →</a></p>
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / <a href="../instruments/index.html">instruments</a> / iso-31000</div>
+<h1>ISO 31000 <span class="lbl lbl-std">Standard</span></h1>
+<p class="lead">There is nothing here yet, and this page is one paragraph explaining why rather than two thousand newly-written words pretending to be a consolidation.</p>
 
-<div class="tablewrap"><table class="vers">
-  <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
-  <tbody>
-    <tr>
-      <td class="vnum">v0.1.1</td>
-      <td>24 Aug 2026</td>
-      <td><b><a href="../method/index.html">/method/</a> first, then the instruments.</b> Building the meta layer before any instrument folder is counter-intuitive and correct: it makes instruments two through <em>N</em> cheap, and given that ISO text cannot be republished it is <b>the only material here that is itself the product</b>. The taxonomy/ontology split with the paragraph as the hinge; paragraph-as-folder storage where <em>cost scales with change, not with size</em>; <b>two hashes per provision</b> — one for the slot, one for what is in it — which is what makes a crosswalk survive amendment; retrieval records as provenance, justified by a probe that found three states of AI Act text in the wild including <em>a text that never was the law</em>; authority anchoring by deferral; and <b>the acceptance test the method has not yet passed</b>, published as unpassed. Then <a href="../eu-ai-act/index.html">the EU AI Act</a> — 1,523 nodes and 1,944 edges, pointing at the existing Regulation Graph vault rather than rebuilding it, with four provision pages, the worked example, and <a href="../eu-ai-act/status.html">a status page stating both real weaknesses</a>. <b>Operative text is deliberately withheld</b> pending re-derivation, and <a href="../eu-ai-act/provisions/art-099.html#disputed">one disputed number is left off a page</a> rather than resolved by guessing. <a href="../gdpr/index.html">GDPR</a> and <a href="../iso-27001/index.html">ISO/IEC 27001</a> as honest stubs; <a href="../iso-31000/index.html">ISO 31000</a> as a single paragraph pointing at risks.sgit.ai.</td>
-    </tr>
-    <tr>
-      <td class="vnum">v0.1.0</td>
-      <td>24 Aug 2026</td>
-      <td><b>The pipeline first, and the front page it gates.</b> <code>.github/workflows/deploy-pages.yml</code> ported from <a href="https://pki.sgit.ai">pki.sgit.ai</a> — <b>validate → tag → deploy</b>, where a validation failure stops the release entirely: no tag, no publish. Auto-tagging reads the version from <code>admin/build/version.txt</code>, requires it to agree with the release commit's subject, enforces that the bump is the next minor, tags the release commit (HEAD on a direct push, HEAD's parent when a pull request lands as a merge), and backfills tags for any historical release from the commit subjects. <code>admin/build/chrome.py</code> owns the nav and footer as a single definition applied across every page, so a thirty-page site cannot drift. <code>admin/build/validate.js</code> carries five checks, two of them new for this site: <b>the key-leak tripwire extended to write-key material</b> — the prefix may be discussed in prose, because explaining why a write key is never published requires naming it, but <b>eight or more key-shaped characters after it fails the build in any file, always</b> — and <b>the instrument-labelling check</b>, which makes the condition for keeping this site's name mechanical rather than remembered. And the front page, which leads with the three-way LAW/STANDARD/FRAMEWORK distinction before the thesis, because the site's name overstates a third of what it holds and that is better as the opening argument than as the first error.</td>
-    </tr>
-  </tbody>
-</table></div>
+<dl class="ihead">
+  <dt>Kind</dt><dd><span class="lbl lbl-std">Standard</span> — ISO 31000 (risk management) and ISO/IEC 27005 (information security risk)</dd>
+  <dt>Republishable</dt><dd><span class="rep rep-no">NO</span> — the same ISO constraint as <a href="../iso-27001/index.html">27001</a></dd>
+  <dt>In the source corpus</dt><dd><b class="no">Zero occurrences.</b> Verified case-insensitively, with and without spaces and slashes</dd>
+  <dt>Status</dt><dd><b>Not started, and deliberately not stubbed with generated content</b></dd>
+  <dt>Where the risk work is</dt><dd><a href="https://risks.sgit.ai"><b>risks.sgit.ai</b></a></dd>
+</dl>
 
-<h2 id="scheme">The version scheme</h2>
-<p><code>v{release}.{major}.{minor}</code>. Every push to <code>dev</code> is a minor release; CI rejects a bump that is neither the next minor nor a deliberate major. The version appears in four places and <b>they must agree or the build fails</b>: <code>version.txt</code>, every page's nav badge, this table, and the text twins (<code>llms.txt</code>, <code>llms-full.txt</code>, <code>index.md</code>). Only <code>version.txt</code> is edited by hand — <code>chrome.py</code> propagates it to the rest, because hand-editing it is how a sibling site silently missed it twice.</p>
+<h2 id="nothing">Nothing exists, and that is the finding</h2>
+<p>ISO 31000 and ISO/IEC 27005 were named in the commission for this site. Neither appears anywhere in the material behind it — <b>zero occurrences</b>, checked case-insensitively and in every spacing and punctuation variant. There is no analysis to publish, nothing to adapt, and no worked example to lift. Writing a page anyway would mean generating an account of a standard nobody here has worked with, which is the exact failure mode this site exists to argue against: <a href="../eu-ai-act/status.html#w1">second-hand content presented as though it points at something</a>. And the text could not be quoted even then.</p>
 
-<div class="pagenav"><a href="comms.html">← Comms</a> <a href="index.html">Admin &amp; engineering →</a></div>
+<h2 id="risks">What is almost certainly wanted instead</h2>
+<p>The reason to reach for “the risk standard” is usually a wish for the apparatus, not the document — a way to say what a risk is, when it is grounded, and what accepting one means. <b>That apparatus exists in this project, it is substantial, and it is a different site.</b></p>
+<div class="cards">
+  <a class="card" href="https://risks.sgit.ai"><span class="tag">The site</span><h3>risks.sgit.ai</h3><p>The register, the acceptance decision, RAMM, and the distinction that does most of the work: <b>accepted is not the same as acceptable</b>.</p><span class="go">Go →</span></a>
+  <a class="card" href="../method/ladder.html"><span class="tag">Shared</span><h3>The grounding ladder</h3><p>Five lines defining what must exist below a claim for it to stand. Shared apparatus — this site owns its application to provisions, risks owns its application to the register.</p><span class="go">Read →</span></a>
+</div>
+<p>The boundary, stated so neither site rebuilds the other: <b>risks owns the register and the acceptance decision; standards owns the provision and the arithmetic.</b> Where a worked example serves both — and <a href="../eu-ai-act/worked-example.html">one does</a> — there is one canonical copy and the other links in. <a href="../admin/comms.html#open">Q1, open →</a></p>
+
+<h2 id="if">If this folder is ever built</h2>
+<p>It would be a <a href="../iso-27001/index.html">27001-shaped folder</a>: clause references, the project's own interpretations, a reading guide, crosswalks to publishable instruments, and an empty <code>source/</code> layer. The prerequisite is the same open question — <a href="../iso-27001/index.html#hollow">whether the model can hold a standard it cannot quote</a> — and the honest sequencing is that it comes after instruments that can be quoted, because those are the ones that establish whether the method works at all.</p>
+
+<div class="pagenav"><a href="../iso-27001/index.html">← ISO/IEC 27001</a> <a href="../subsets/index.html">Subsets →</a></div>
 </main>
 
 

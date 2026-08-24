@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bridges, not merges — how crosswalks are built · standards.sgit.ai</title>
+<meta name="description" content="A merge asserts two provisions mean the same thing and fails silently; a bridge asserts a relationship with a basis and fails visibly. Why bridges attach to the positional hash and therefore survive amendment, what a bridge must carry, and the five preconditions — of which one is met.">
+<link rel="canonical" href="https://standards.sgit.ai/method/crosswalks.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl here" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / <a href="index.html">method</a> / crosswalks</div>
+<h1>Bridges, not merges</h1>
+<p class="lead">A crosswalk says <em>this provision over here bears on that provision over there</em>. There are two ways to build one, they look similar on a slide, and they fail completely differently. This page argues for the one that fails visibly.</p>
+
+<div class="warnbox"><b>Before the argument, the fact: there are no crosswalks on this site.</b> Zero. Not AI Act ↔ GDPR, not ISO 27001 ↔ SOC 2, not GDPR ↔ NIS2 incident reporting — all three named as obviously valuable in the project's own material, none built. <code>FrameworkReference</code>, the bridge node type, is specified and never instantiated. <b>This page is a design, and <a href="../shipped/index.html">the shipped page says so too</a>.</b></div>
+
+<h2 id="two">Two ways to relate two instruments</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th class="fatal">A merge</th><th class="safe">A bridge</th></tr></thead>
+  <tbody>
+    <tr><td><b>What it asserts</b></td><td>These two provisions <em>mean the same thing</em></td><td>These two provisions <em>stand in a stated relationship</em>, on a stated basis</td></tr>
+    <tr><td><b>Where it lives</b></td><td>Inside a merged node</td><td>As an edge, with its own properties</td></tr>
+    <tr><td><b>Can a reader disagree with it?</b></td><td><b class="no">Not usefully</b> — the disagreement has nowhere to attach</td><td><b class="yes">Yes</b> — the basis is written down and can be argued with</td></tr>
+    <tr><td><b>What happens when one is amended</b></td><td><b class="no">A silently wrong node.</b> The merged meaning is now false and nothing indicates it</td><td>A wrong edge you can <b class="yes">find</b> — the content hash moved under a bridge attached to the positional hash</td></tr>
+    <tr><td><b>Failure mode</b></td><td>Invisible</td><td>Visible and locatable</td></tr>
+  </tbody>
+</table></div>
+
+<p class="claim">A merge that is wrong is a silently wrong node. A bridge that is wrong is a wrong edge you can find and fix.</p>
+
+<p>And two instruments almost never mean the same thing. GDPR Article 32 requires security appropriate to the risk; ISO/IEC 27002 describes an encryption control. Those are related. They are not the same statement, they do not have the same addressee, and one does not discharge the other. A merge asserts an equivalence that is not there; a bridge records the relationship that is.</p>
+
+<h2 id="survive">Why bridges survive amendment</h2>
+<p>This is where <a href="index.html#hashes">the two-hash scheme</a> stops being a storage detail and becomes the enabling decision.</p>
+<p>A bridge attaches to the <b>positional</b> hash — the identity of the <em>slot</em>. When an instrument is amended, the wording moves and the content hash changes; the slot holds, and so does every mapping into it. Attach a crosswalk to text and you have a spreadsheet that rots. Attach it to a position and you have an artefact that survives revision <em>and can report that the text underneath it moved</em>.</p>
+<pre class="shell">bridge --attached-to--&gt; <span class="y">positional hash</span>   (stable)
+                            |
+                        <span class="g">content hash</span>       (moves on amendment)
+                            |
+                        <span class="y">=&gt; the bridge is FLAGGED, not broken</span></pre>
+<p>That last line is the product. A mapping that knows it may be stale is worth having; a mapping that cannot tell is worse than none, because it looks current.</p>
+
+<h2 id="basis">Every bridge carries a basis and a strength</h2>
+<p>A crosswalk that can only say <em>yes</em> is either wrong or useless. The project's own phrase for what is needed is <b>“shades of compliance”</b> — and there is no scale behind it yet. That is an open question, published as one, and it blocks the crosswalk browser.</p>
+<p>The shape a bridge must carry, whatever the scale turns out to be:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Field</th><th>Why it is mandatory</th></tr></thead>
+  <tbody>
+    <tr><td><code>from</code> / <code>to</code></td><td>Positional hashes, both ends. Never labels</td></tr>
+    <tr><td><code>relation</code></td><td>From <a href="grammar.html#edges">the published grammar</a> — and if no established edge fits, an argument for the new one</td></tr>
+    <tr><td><code>basis</code></td><td>Prose. <em>Why</em> somebody drew this edge. A bridge with no basis cannot be argued with, which makes it a merge wearing an edge's clothes</td></tr>
+    <tr><td><code>strength</code></td><td>How much of the target this actually discharges. <b>Undefined — <a href="../admin/comms.html#open">Q4</a></b></td></tr>
+    <tr><td><code>asserted_by</code> / <code>asserted_at</code></td><td>A crosswalk is an opinion. Opinions have authors and dates</td></tr>
+    <tr><td><code>source_content_hash</code></td><td>The content hash at each end <em>when the bridge was drawn</em>. This is what makes staleness computable rather than assumed</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="compounding">The compounding argument</h2>
+<blockquote class="challenge">the AI standard already links to another of the standards, another acts that you need to be able to access as a graph… <b>Map a second instrument and the edge resolves; map a third and two more resolve. So each mapping increases the value of the ones already done.</b></blockquote>
+<p>Concretely: the EU AI Act refers out to GDPR, to NIS2, to harmonised standards, to conformity assessment bodies and to notified bodies. Every one of those references is currently a node pointing at nothing. Model GDPR and a whole class of them resolves — and the AI Act graph gets better without anybody touching it.</p>
+<p><b>The same conclusion was reached independently, years earlier, by somebody else</b>, which is worth stating on a page arguing for a method:</p>
+<blockquote class="challenge">A single graph can include nodes from GDPR, PCI DSS, ISO 27001, OWASP ASVS, etc. If two standards address the same concept (say “access control”), the graph can link them to a common concept node. <b>The University of Maryland's researchers who built an integrated GDPR + PCI DSS ontology did exactly this.</b></blockquote>
+<p><a href="index.html#prior">The rest of the prior art →</a></p>
+
+<h2 id="before">What must be true before a crosswalk browser ships</h2>
+<ol class="order">
+  <li><b>One crosswalk exists.</b> Any pair. AI Act ↔ GDPR is the natural first — the two apply concurrently, so the relationship is real rather than academic.</li>
+  <li><b><code>FrameworkReference</code> is instantiated.</b> Specified since July, built never.</li>
+  <li><b>A basis and a strength on every bridge</b> — which needs the scale that does not exist. <a href="../admin/comms.html#open">Q4</a>.</li>
+  <li><b>The contract version is stamped</b> in each instrument's <code>MANIFEST.json</code>, so a tool can refuse a shape it does not speak.</li>
+  <li><b>The citation scheme is decided</b>, because every bridge is a pair of citations. <a href="citation.html">Done — the scheme is on the next page</a>.</li>
+</ol>
+<p>Five preconditions, one met. <a href="../tools/index.html#t1">The crosswalk browser is T1</a> and it is the thing a multi-standard site sells; it is also the one tool that cannot be faked, because with zero bridges it renders an empty screen.</p>
+
+<div class="pagenav"><a href="grammar.html">← The grammar</a> <a href="citation.html">The citation scheme →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

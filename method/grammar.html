@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The grammar — node and edge types · standards.sgit.ai</title>
+<meta name="description" content="Nine node types and the edge vocabulary this site models legal instruments with, plus the governance rule that keeps an ontology from sprawling: exhaust the established edge set before proposing a new one. Two node types are marked as specified but never instantiated.">
+<link rel="canonical" href="https://standards.sgit.ai/method/grammar.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl here" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / <a href="index.html">method</a> / grammar</div>
+<h1>The grammar</h1>
+<p class="lead">The node and edge types this site models instruments with, published as a stated grammar rather than left to be inferred from the data. Publishing it is what makes ten instruments interoperable instead of ten shapes that happen to share a repository.</p>
+
+<h2 id="nodes">Node types</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Type</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr><td><code>Provision</code></td><td>An article, paragraph or point, <b>carrying its source reference</b>. The unit everything else attaches to</td></tr>
+    <tr><td><code>Definition</code></td><td>A term the instrument defines for its own purposes. Usually an article of its own, and usually the most-referenced node in the graph</td></tr>
+    <tr><td><code>Requirement</code></td><td>Something that must be the case</td></tr>
+    <tr><td><code>Obligation</code></td><td>Something a named actor must do</td></tr>
+    <tr><td><code>Prohibition</code></td><td>Something that must not be done. Kept separate from <code>Obligation</code> because a prohibition and a negated obligation behave differently under exemption</td></tr>
+    <tr><td><code>Control</code></td><td>A measure that satisfies a requirement. <b>Proposed and never instantiated</b> — see the honesty note below</td></tr>
+    <tr><td><code>Actor</code></td><td>The roles the instrument itself defines — <em>provider</em>, <em>deployer</em>, <em>importer</em>, <em>notified body</em>. Not organisations; the instrument's own vocabulary</td></tr>
+    <tr><td><code>Amendment</code></td><td>Added later, and first-class. A change to an instrument is a node in its own right, not a property of the thing it changes — which is what makes amendment history queryable</td></tr>
+    <tr><td><code>FrameworkReference</code></td><td>The bridge node of the ontologies-of-ontologies model. <b>Specified, never built.</b> <a href="crosswalks.html">Crosswalks →</a></td></tr>
+  </tbody>
+</table></div>
+
+<div class="warnbox"><b>Two of these have never been instantiated, and the pages that use them say so.</b> <code>Control</code> is a proposed node type with no instances anywhere in the corpus — which is also why <em>controls</em> was rejected as a name for this site. <code>FrameworkReference</code> is the crosswalk bridge, and there are zero crosswalks. A grammar is cheap to write; the honest part is marking which of it is load-bearing today.</div>
+
+<h2 id="edges">Edge types</h2>
+<p><b>Structural and instrument-specific:</b></p>
+<p><code>defines</code> / <code>defined_in</code> · <code>applies_to</code> · <code>triggers</code> · <code>exempts</code> · <code>references</code> · <code>satisfied_by</code> · <code>in_scope_when</code></p>
+<p><b>Amendment:</b></p>
+<p><code>amends</code> · <code>substitutes</code> · <code>inserts</code> · <code>deletes</code> · <code>repealed_by</code> · <code>effective_from</code> · <code>references</code></p>
+
+<h2 id="established">The established set — exhaust it first</h2>
+<p>This is a governance decision with an outsized effect. The wider project already has an edge vocabulary, used across risk graphs and twins, and the rule is that a legal instrument reaches for it <em>before</em> inventing anything.</p>
+<blockquote class="challenge">Where an established edge already fits, it should be used instead. A requirement that reduces a risk is <code>protected_by</code>; a control whose value depends on an assumption is <code>conditional_on</code>; a provision that creates exposure is <code>gives_rise_to</code>; the connection from any node to a twin and onward to reality is <code>connected_to</code>.</blockquote>
+<p>The established set, in full:</p>
+<p><code>connected_to</code> · <code>observed_on</code> · <code>backed_by</code> · <code>measured_by</code> · <code>grants</code> · <code>reaches</code> · <code>enables</code> · <code>exposes</code> · <code>gives_rise_to</code> · <code>protected_by</code> · <code>conditional_on</code> · <code>defeated_by</code> · <code>owned_by</code> · <code>accepted_by</code> · <code>underwritten_by</code></p>
+
+<p class="claim">A new edge type requires an argument for why no established one fits.</p>
+
+<p>That rule is the whole governance model, and it is deliberately annoying. An ontology that accepts new edge types on request becomes a hundred near-synonyms in a year, and at that point nothing composes: a query written against one instrument silently misses half of another. The cost of the rule is friction on the person adding an instrument. The benefit is that <a href="crosswalks.html#compounding">the compounding argument</a> is mechanically true rather than aspirational.</p>
+
+<h2 id="ids">Identity</h2>
+<p>Every node carries two identities and a human alias. <a href="index.html#hashes">The two-hash scheme</a> is the reason:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Field</th><th>Example</th><th>Stable across amendment?</th></tr></thead>
+  <tbody>
+    <tr><td><b>Positional hash</b> — the node id</td><td><span class="hash hash-pos"><b>pos</b> 3f9c1a…</span></td><td><b class="yes">Yes.</b> This is what a citation and a crosswalk attach to</td></tr>
+    <tr><td><b>Content hash</b></td><td><span class="hash hash-con"><b>sha</b> 8e21b4…</span></td><td><b class="no">No</b> — and that is the point. It moving is the amendment signal</td></tr>
+    <tr><td><b>Human alias</b></td><td><code>art-026-para-05</code></td><td>Yes, unless the instrument renumbers — in which case the alias moves and the positional hash does not</td></tr>
+  </tbody>
+</table></div>
+<p><b>Address by positional hash, never by array index or display label.</b> Labels are translations; array positions are an accident of how a file was parsed. This is rule 2 of <a href="../tools/index.html#contract">the tool contract</a>, and the reason it is a rule rather than advice is that both failure modes are silent.</p>
+
+<h2 id="json">The grammar as data</h2>
+<p>Agents are half the audience for this page, so the grammar is also served as JSON, with a contract version a tool can refuse politely on:</p>
+<p><a href="../agents/grammar.json"><code>/agents/grammar.json</code></a> — node types, edge types, the established set, the identity fields, and <code>contract_version</code>. <a href="../agents/index.html">The machine surface →</a></p>
+
+<div class="pagenav"><a href="index.html">← The method</a> <a href="crosswalks.html">Bridges, not merges →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>
