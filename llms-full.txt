@@ -1,0 +1,657 @@
+# standards.sgit.ai — the long form
+
+Site version: v0.1.0 (24 August 2026). CC BY 4.0. Published by the sgit project, which
+builds the vault layer these instruments are delivered on — participant disclosure at
+/about/participant.html. This file is the long companion to /llms.txt: same site, more
+of the reasoning, and every page enumerated.
+
+THE ONE RULE: an agent may report which provision a claim points at. It may not report
+that a requirement is met. That is the difference between evidence and a compliance
+verdict, and this project draws it four separate times in its own words.
+
+================================================================================
+1. WHAT THIS SITE IS, AND THE TWO CLAIMS IT OPENS WITH
+================================================================================
+
+The commission was "a new home for all the standards and the vaults that we have
+created", with a subfolder per standard, tools outside the vaults that consume vault
+materials, and a private vault holding the write keys to the others. The architecture was
+the more important half: "the graphs and the data and all of that will be stored in
+vaults that can be easily used and consumed, and that becomes almost a delivery
+mechanism... and the website becomes a projection of that."
+
+CLAIM ONE — the three-way distinction, which leads because the site's name overstates a
+third of what it holds:
+
+  LAW        ~72%  EU AI Act, GDPR/UK GDPR, NIS2, DORA, CRA, HIPAA, PECR, CCPA, SOX,
+                   DPA 2018. Binds directly; penalties written into the instrument.
+  FRAMEWORK  ~20%  OWASP, NIST CSF/800-53/AI RMF, MITRE ATT&CK and ATLAS, BSIMM, CMMC,
+                   SLSA. Binds only when a contract, regulator or customer points at it.
+  STANDARD    ~8%  ISO 27001/27002/42001, SOC 2, PCI DSS, CycloneDX, SPDX, Akoma Ntoso.
+                   Binds by certification or attestation issued by a third party.
+
+The corpus's own framing: "We see this pattern in cybersecurity broadly: laws vs.
+frameworks vs. controls. A law (like NIS2 or GDPR) states 'what' outcomes must be
+achieved... often without stating 'how.' The 'how' is found in frameworks like ISO 27002."
+
+Keeping the name "standards" was recommended CONDITIONALLY — the honest runner-up was
+"regulations.sgit.ai" — on condition that the distinction became the front page's first
+substantive claim and every instrument page carried the label. Both conditions are met,
+and the second is enforced by CI rather than remembered.
+
+CLAIM TWO — the thesis: "A risk in a register points at a named obligation in a real
+instrument instead of being asserted."
+
+And the argument for more than one instrument: "Map a second instrument and the edge
+resolves; map a third and two more resolve. So each mapping increases the value of the
+ones already done."
+
+================================================================================
+2. THE METHOD  (/method/)
+================================================================================
+
+Built first, before any instrument folder. Three reasons: it already existed in
+publishable form, it makes instruments 2..N cheap, and — given that ISO text cannot be
+republished at all — it is the only material here that is ITSELF the product rather than
+a mapping of somebody else's copyrighted text.
+
+2.1 TAXONOMY AND ONTOLOGY ARE NOT THE SAME EDGE
+
+                    OUTWARD: ontology
+                    concepts, definitions, entities,
+                    obligations, risks, external terms
+                              ^
+                              |
+   UPWARD: taxonomy    [ PARAGRAPH ]    the structural spine
+   bullet -> paragraph -> article -> chapter -> instrument
+
+"The failure this avoids is the common one of modelling both as a single graph, where
+structural containment and semantic relationship become the same kind of edge. Then a
+query for what this article contains returns concepts, and a query for what this concept
+relates to returns paragraph numbers, and neither answer is useful."
+
+2.2 PARAGRAPH AS FOLDER
+
+  structure/article-026/paragraph-05/
+      text.md          -> positional hash + content hash
+      analysis.md      -> cached against the CONTENT hash
+      annotations.json -> cached against the CONTENT hash
+      references.json
+      index.json       -> this folder's own index
+
+  amendment arrives -> re-hash -> only changed paragraphs reprocess
+  COST SCALES WITH CHANGE, NOT WITH SIZE
+
+2.3 TWO HASHES, AND IT IS THE LOAD-BEARING DECISION
+
+                    Positional hash            Content hash
+  Derived from      the address in the tree    the text
+  Answers           which provision is this?   what does it currently say?
+  Moves when        renumbered or relocated    the wording is amended
+  Used for          citations, deep links,     change detection, cache keys,
+                    CROSSWALK ATTACHMENT       verification
+  Under amendment   STABLE                     MOVES
+
+"One identity for the slot, one identity for what is in it." A crosswalk attaches to the
+POSITIONAL hash and therefore survives revision — and can report that the text underneath
+it moved. Attach a mapping to text and you have a spreadsheet that rots.
+
+On this site the positional hash is computed as sha256('<instrument-slug>/<alias>')
+truncated to 16 hex characters. It is recomputable by anybody with one shell command,
+which is deliberate: an identifier you have to trust is a worse identifier.
+
+2.4 PROVENANCE
+
+Every instrument vault holds source/ — the retrieved bytes UNMODIFIED, a .sha256 beside
+each, and a RETRIEVAL.md recording where, when, by what method and with what response
+headers. For the EU AI Act that is official Formex XML from CELLAR.
+
+The justification is empirical. A probe of AI Act text as it circulates found three
+states: current, superseded, and "a text that never was the law" — a negotiating draft
+published as though in force. And the corollary that removes the obvious mitigation:
+"Cross-checking two sources cannot establish currency, since agreement only shows both
+are old." Two sources agreeing is not evidence. A retrieval record is.
+
+FOR ISO, THE source/ LAYER IS EMPTY AND THE PAGE SAYS WHY.
+
+2.5 AUTHORITY ANCHORING
+
+"The answer to how you know you are linking to the right one is that you do not decide,
+you defer. An entity reference terminates at the identifier the Union itself publishes
+for that body rather than at a node we created and named."
+
+"A concept has one identifier and many labels, one per language, so the concept is
+language-independent and the word is a projection of it." Multilingual is therefore nearly
+free for EU instruments, which ship in 24 languages against the same structure. Whether to
+ship it is Q8 — a real differentiator and a standing maintenance commitment.
+
+2.6 THE ACCEPTANCE TEST, PUBLISHED AS UNPASSED
+
+"The practical test is whether the same structure holds an ISO standard, a compliance
+framework and an internal policy without special cases. If it does, the pipeline is real.
+If it does not, what exists is an AI Act reader."
+
+Instrument two is the test; instrument three is the proof. NEITHER HAS BEEN RUN. The ISO
+case may be impossible as specified, because the model assumes provision text as a node
+property. The result will be published either way — a documented special case is more
+useful than a claim of generality.
+
+2.7 THE GRAMMAR  (/method/grammar.html, /agents/grammar.json)
+
+Node types: Provision, Definition, Requirement, Obligation, Prohibition, Control, Actor,
+Amendment, FrameworkReference. TWO OF THESE HAVE NEVER BEEN INSTANTIATED — Control
+(proposed, no instances anywhere) and FrameworkReference (the crosswalk bridge; there are
+zero crosswalks). The JSON marks each one.
+
+Structural edges: defines, defined_in, applies_to, triggers, exempts, references,
+satisfied_by, in_scope_when.
+Amendment edges: amends, substitutes, inserts, deletes, repealed_by, effective_from,
+references.
+The established set, which must be exhausted first: connected_to, observed_on, backed_by,
+measured_by, grants, reaches, enables, exposes, gives_rise_to, protected_by,
+conditional_on, defeated_by, owned_by, accepted_by, underwritten_by.
+
+THE GOVERNANCE RULE: a new edge type requires an argument for why no established one
+fits. Deliberately annoying, and it is what makes the compounding argument mechanically
+true rather than aspirational — an ontology that accepts new edge types on request
+becomes a hundred near-synonyms in a year, at which point nothing composes.
+
+Identity rule for tools: address by positional hash, NEVER by array index or display
+label. Labels are translations; array positions are an accident of parsing. Both failure
+modes are silent.
+
+2.8 CROSSWALKS: BRIDGES, NOT MERGES  (/method/crosswalks.html)
+
+A MERGE asserts two provisions mean the same thing. A reader cannot usefully disagree
+with it, and when one instrument is amended it becomes a SILENTLY WRONG NODE.
+A BRIDGE asserts a relationship with a stated basis. A reader can disagree with it, and
+when one end is amended the content hash moves under a positional hash the bridge is
+attached to — so the bridge is FLAGGED, not broken.
+
+"A merge that is wrong is a silently wrong node. A bridge that is wrong is a wrong edge
+you can find and fix."
+
+Required fields on every bridge: from, to (positional hashes), relation (from the
+published grammar), basis (prose — a bridge with no basis is a merge wearing an edge's
+clothes), strength, asserted_by, asserted_at, source_content_hash at each end.
+
+STRENGTH IS UNDEFINED. The vocabulary is "shades of compliance"; there is no scale. A
+crosswalk that can only say "yes" is either wrong or useless. This is Q4 and it blocks
+the crosswalk browser.
+
+Five preconditions before a crosswalk browser can ship, of which ONE is met:
+  1. One crosswalk exists. Any pair. AI Act <-> GDPR is natural — they apply
+     concurrently.                                                        NOT MET
+  2. FrameworkReference is instantiated.                                  NOT MET
+  3. A basis and strength on every bridge (needs Q4).                     NOT MET
+  4. contract_version stamped in each MANIFEST.json.                      NOT MET
+  5. The citation scheme is decided.                                      MET
+
+2.9 THE CITATION SCHEME  (/method/citation.html, /tools/resolver.html)
+
+  https://standards.sgit.ai/<instrument>/provisions/<alias>.html
+
+Instrument slug: lowercase, hyphenated, NO VERSION — a citation should survive a
+consolidation. Alias: zero-padded so it sorts (art-026-para-05, art-009-para-05-pt-d,
+rec-060, anx-III-pt-05-b). The canonical id is the positional hash; the alias is a
+projection of it.
+
+A citation resolves to four things or it is not a citation: the text (or a stated reason
+there is none); both hashes; the retrieval record; every crosswalk touching it.
+
+GitHub Pages cannot content-negotiate, so the JSON twin is a sibling path rather than an
+Accept header: /<instrument>/<instrument>.json.
+
+CITATION PRECISION: every reference carries instrument, article, paragraph AND POINT.
+The rule came from a self-correction — a reading of Article 9(5) described it as
+referring back to "paragraph 2" where the operative text refers back to "paragraph 2,
+point (d)". One point, not a whole paragraph. Invisible in prose, permanent in a graph.
+
+WHAT THE SCHEME DOES NOT FIX: the vault viewer and the ciphertext API both live on
+dev.-prefixed hosts, and the dist/ exports that would let a third party archive an
+instrument independently do not exist. Third-party archival is currently a claim rather
+than a capability.
+
+2.10 THE GROUNDING LADDER  (/method/ladder.html)
+
+    Risk          := a downward path to a Vulnerability AND an upward path to a top risk
+    Vulnerability := a Fact (grounded below) AND an upward path to a Risk
+    Fact          := a downward path to Evidence
+    Evidence      := a downward path to a Measure
+    Measure       := an observation of the node it measures, grounded on a Twin
+
+The anti-fabrication argument: a model asked "are we compliant with Article 26?" will
+produce a fluent answer whether or not it has any information about your systems. A model
+asked to produce the path — this finding, from this fact, from this evidence, from this
+measure, on this twin — either produces it or reports that it cannot. THERE IS NO FLUENT
+VERSION OF A MISSING EDGE. This is not a claim about model quality and does not improve
+with a larger model; it is a claim about what the question makes possible to fake.
+
+The five rules: (1) unevidenced facts are first-class findings, not omissions — the best
+worked example ships with five of nine questions unanswered and calls that the actual
+output; (2) absence is output, so it is GHOSTED and rendered rather than dropped, because
+a table that silently omits what it does not know reads as complete; (3) computed, not
+claimed — a number that cannot be recomputed from the graph does not belong in it;
+(4) regulation as evidence, not checklist; (5) coverage is a measurable property of the
+graph itself.
+
+WHAT IT IS NOT: "Not a compliance product. It exists to give risks an evidentiary anchor,
+not to tell an organisation whether it passes." / "Not a compliance verdict." / "the
+point is evidence, not compliance." Three enforced consequences: no tool outputs a pass,
+a score or a percentage; no page says "compliant", "meets" or "satisfies" without naming
+the evidence and the measure; agents get the same rule.
+
+================================================================================
+3. INSTRUMENTS  (/instruments/)
+================================================================================
+
+Every folder has the same eight sections: index, structure, concepts, provisions/<id>,
+crosswalk, worked-examples, vault, status. The status section is NOT OPTIONAL.
+
+3.1 EU AI ACT  (/eu-ai-act/)  — LAW — republishable YES
+
+Regulation (EU) 2024/1689 composed with amending Regulation (EU) 2026/1744, in force from
+27 July 2026. NO OFFICIAL CONSOLIDATED VERSION EXISTS, which is the market gap the vault
+fills and also a hazard: it produces an unofficial text that looks official, which is the
+precise shape of the thing the staleness probe found in the wild. The composition is
+labelled as one everywhere, and the amendment is a first-class node rather than silently
+applied. What the labelling obligation formally requires is Q5.
+
+Graph: 1,523 nodes, 1,944 edges — 113 articles, 500 paragraphs, 417 points, 180 recitals,
+13 annexes, 68 definitions. Parsed from official Formex XML retrieved from CELLAR,
+hash-verified, parsed deterministically, with a SHA-256 of the retrieved bytes on every
+node. Vault "Regulation Graph" (73heuprz), 207 files, 14.9 MB, 11 app views including
+SQL via sql.js, RDF with Turtle export, a Cytoscape citation network with amendment
+halos, and an Article 9 Lab whose graph REPL requires a bring-your-own OpenRouter key
+precisely so no metered capability sits behind the published read key.
+
+PUBLISHED PROVISIONS: art-026-para-05 (a dual obligation — suspension AND notification;
+"suspension without notification is not compliance, and notification without suspension
+is not either"), art-026-para-06 (log retention; the arithmetic one), art-009-para-05
+("the obligation to make the judgement is imposed; the standard against which to judge is
+not supplied"), art-099 (penalties, the SME inversion). Five more have stable positional
+hashes and no page yet, and are listed as ghosted rather than omitted.
+
+THE SME INVERSION: for most undertakings the fine is the HIGHER of the fixed sum or the
+percentage; for small and medium enterprises and start-ups it is the LOWER of the two.
+Applying "the higher of" to a small company overstates its exposure, sometimes greatly.
+
+ONE NUMBER IS DELIBERATELY NOT PUBLISHED: the Article 99 third penalty tier is internally
+disputed (1% vs 1.5%) with the instruction "the operative text should be checked before
+this is used anywhere external". It is left off the page rather than resolved by guessing
+— the smallest possible demonstration of the site's own standard, at its own expense.
+
+TWO REAL WEAKNESSES (/eu-ai-act/status.html):
+  (a) The readings are derived from SECONDARY sources rather than a clause-by-clause
+      reading of the operative text. The project flagged this against itself twice,
+      unprompted, including: "This brief describes the Article 10 change from secondary
+      analysis, which is exactly the second-hand pattern it criticises elsewhere."
+      Consequence: THIS SITE DOES NOT REPRODUCE OPERATIVE TEXT on provision pages. Each
+      page carries the citation, the address, the hashes and the reading, marked as a
+      reading, and points at the authority. The text lands when the re-derivation pass is
+      done.
+  (b) The vault has TWO COMMITS and composes the amendment IN rather than tracking it as
+      a change. The most valuable property — change over time, "the amendment is the
+      business model" — is the one least demonstrated. Fixing it needs the pre-amendment
+      text stored as its own version, which is the missing commit.
+
+THE CONFORMITY GAP: "None of the deliverables currently grants presumption of conformity,
+because none has been cited in the Official Journal. Both conditions are required and
+neither is met."
+
+WORKED EXAMPLE (/eu-ai-act/worked-example.html): a deployer running a PROCURED agentic
+underwriting system for creditworthiness — an Annex III high-risk category. 8 facts, 7
+evidence items, 5 provisions, 3 findings, 5 risks, 4 stakeholder views, 2 projects, and
+9 questions of which 5 ARE UNANSWERED.
+  V1 log retention below the required minimum — 30 days against six months. "This is
+     arithmetic, not judgement, which makes it the most defensible finding in the graph."
+     Published with its own caveat: "Thirty days against six months is clean; most
+     obligations are not that crisp, and the graph must not imply they are."
+  V2 the suspension-and-notification path has never been exercised. A design document is
+     not a capability.
+  V3 residual risk has not been judged against any stated standard. Accepted is not
+     acceptable.
+Four of the five unanswered questions cannot be answered by the deployer alone because
+the evidence sits with the provider — which is itself the finding: a procurement
+relationship that does not transfer evidence leaves the deployer holding obligations it
+cannot discharge.
+
+CROSSWALK: EMPTY. The Act refers out to GDPR, NIS2, harmonised standards, notified bodies
+and conformity assessment procedures, and every one of those references currently
+terminates at nothing.
+
+3.2 GDPR  (/gdpr/)  — LAW — republishable YES — AN HONEST STUB
+
+THERE IS NO GDPR VAULT AND NO GDPR GRAPH. Verified against eight independent sources: the
+catalogue HTML, its raw index.md, llms.txt, llms-full.txt, the demos index, the catalogue
+index, the graph API's vault listing, and web search. The description that produced the
+belief — "it consolidates all the stuff" — accurately describes the AI ACT vault.
+
+What exists: two finished white papers (method, now folded into /method/), an assessment
+design, one article-by-article pass that CANNOT be published, and two worked fragments.
+
+Why it is harder than the AI Act: "GDPR cannot be taken at face value — the rulings, the
+regulator guidance and the per-country variation ARE the graph." The AI Act is new and
+its operative text is nearly all there is. GDPR is eight years old; Article 6(1)(f) is
+four lines of text and a shelf of jurisprudence, and a graph containing only the four
+lines will confidently give the wrong answer. Three layers the method has never been
+asked to hold: rulings (as nodes bridging to what they interpret, with precedential
+weight), regulator guidance (persuasive not binding, and it changes), per-country
+variation (jurisdiction as a first-class property of an edge). THIS IS THE INSTRUMENT
+THAT TESTS THE ACCEPTANCE CRITERION, and it very possibly needs special cases.
+
+The near-crosswalk, the closest thing to a real bridge anywhere in the material:
+  Article 32 GDPR --requires--> Encryption of Personal Data --is a--> Security Control
+  --mitigates--> Confidentiality Risk
+The third edge, into ISO/IEC 27002's encryption control, is the one that can be published
+as a REFERENCE and not as text. That is the ISO pattern in miniature.
+
+HANDLED WITH CARE: the Recital 83 reading that encryption can render a breach
+non-notifiable where the data is unintelligible to anyone not authorised. That is an
+argument about a recital, not a determination — and a vault-native project has an obvious
+interest in it being correct, which is exactly why it is stated carefully and will ship
+with the counter-position beside it.
+
+NOT PUBLISHABLE: the corpus's only article-by-article GDPR pass is a named legal entity's
+own gap table with regulatory exposure attached, and it also assesses a named third
+party's alleged violations (the document itself flags defamation risk). The STRUCTURE is
+reusable; the findings are not.
+
+3.3 ISO/IEC 27001  (/iso-27001/)  — STANDARD — republishable NO
+
+You cannot republish ISO text. Not 27001, 27002, 27005, 31000 or 42001. Not the
+requirement text, not Annex A verbatim, and not a close paraphrase presented as a summary
+— the last being the route people take without noticing. Selling these documents funds
+the organisation. This is a LICENSING BLOCKER, NOT A WRITING TASK. (The project's own
+internal brief listed "ISO 27000" as a vault to build and never mentioned it once.)
+
+May hold: clause references (numbers and titles are citable), the project's own control
+interpretations written from scratch, crosswalks to publishable instruments, a reading
+guide, and an honest page about the paywall. May not hold: requirement text, Annex A
+verbatim, a reproduction dressed as a summary, or a "derived" control list that is the
+standard's list with the words changed.
+
+Q3, AND THE FOLDER CANNOT BE DESIGNED UNTIL IT IS ANSWERED: can the ontology hold a
+standard it cannot quote? The model assumes provision text as a node property. What is
+left is a HOLLOW PROVISION NODE — identity, title, citation, no text, no content hash, no
+retrieval record. Two uncomfortable consequences: a crosswalk into a hollow node cannot
+be checked by a reader without buying the standard, and the two-hash scheme degenerates
+to one hash, removing amendment detection entirely.
+
+The one real asset is ISO/IEC 27036: "an ontology class for ComplianceRequirement... a
+node 'Supplier Security Assessment Conducted'... linked to our Supplier node with a
+relationship like compliant_with IF INDEED WE HAVE EVIDENCE that an assessment was done."
+The conditional is the whole method in one clause.
+
+WHAT A READER WANTS AND DOES NOT GET: how certification actually works — Stage 1 and
+Stage 2 audits, certification bodies and who accredits them, the statement of
+applicability, what a certificate attests to and what it does not. Not written. It is
+net-new work and honestly the most useful thing the folder could contain, because it is
+the part that is not behind the paywall.
+
+The same caution applies in weaker form to SOC 2 (AICPA) and PCI DSS (PCI SSC).
+
+3.4 ISO 31000  (/iso-31000/)  — STANDARD — republishable NO — NOTHING EXISTS
+
+Zero occurrences in the source material, verified case-insensitively and in every spacing
+and punctuation variant. No analysis to publish, nothing to adapt, no worked example.
+Writing a page anyway would mean generating an account of a standard nobody here has
+worked with — the exact failure mode this site argues against. What is usually wanted
+instead is the risk apparatus, and that is risks.sgit.ai.
+
+================================================================================
+4. SUBSETS  (/subsets/)
+================================================================================
+
+"Create a subset, a graph, of those standards that has just the bits, the controls, and
+the elements relevant here... You almost recreate a small standard based on this."
+
+A subset is a VIEW OVER PROVISIONS THAT EXIST ELSEWHERE, computed rather than written.
+Each item cites a real address, so when an instrument is amended the affected item is
+flagged. A summary is new text about provisions and goes silently wrong. A subset also
+sidesteps the ISO blocker: it CITES AND INTERPRETS, IT NEVER REPRODUCES.
+
+/subsets/agentic-access/ — an organisation lets an autonomous agent hold credentials and
+act on real systems. Eight instruments bear on it: EU AI Act, GDPR, NIS2, DORA, HIPAA,
+ISO/IEC 27001, NIST, and the OWASP/MITRE agentic layer. ONE of the eight is modelled
+here; the other seven are cited, not modelled, and nothing recomputes when they change.
+The page says so at the top.
+
+The throughline: least privilege, data minimisation, access control, supply-chain and
+third-party risk, traceable evidence, accountability.
+
+The divergences, which is the half that catches people:
+  - FOUR DIFFERENT CLOCKS. NIS2, DORA, GDPR and the AI Act each impose their own
+    reporting timing, on their own trigger, to their own addressee. One incident can
+    start four clocks at four different moments, and satisfying the earliest satisfies
+    none of the others.
+  - "ACCESS CONTROL" IS NOT ONE REQUIREMENT. HIPAA's unique user identification is a
+    specific and awkward demand where a fleet of agents shares a service account. ISO/IEC
+    27001 Annex A 8.2 is about privileged access as a category. NIST's AC family is a
+    menu with a baseline. Three different obligations sharing a phrase.
+  - ONLY ONE OF THE EIGHT IS ABOUT THE AGENT'S AUTONOMY. Seven treat the agent as a
+    system with credentials. An organisation compliant with all seven can still have no
+    answer to "can a human stop it, and has anyone tried".
+
+The plug question, with the fewest evidenced answers across all eight: "Can a human
+meaningfully oversee it, intervene in it, and stop it, and has anyone tested that?"
+
+================================================================================
+5. VAULTS, KEYS AND TOOLS
+================================================================================
+
+5.1 THE DELIVERY SURFACE  (/vaults/)
+
+THE GOVERNING RULE: nothing exists only in the vault that a reader would need in order to
+check a claim.
+
+Mechanism: ciphertext origin dev.send.sgraph.ai; viewer dev.vault.sgraph.ai; decryption
+client-side in the reader's browser with the read key printed on the host page;
+credential format <readkey>:<vaultid>; embedded in a sandboxed iframe (sandbox=
+"allow-scripts", opaque origin) with the key handed over a VALIDATED postMessage
+HANDSHAKE rather than a URL fragment, so it never appears in any URL and is never written
+to the frame's storage.
+
+Twelve published vaults. EXACTLY ONE is an instrument vault (Regulation Graph). PUBLIC.md
+is on 2 of 12 — not a convention yet. NO ZIP OR SQLITE EXPORT ON ANY OF THEM.
+
+Per-instrument vault layout: PUBLIC.md, MANIFEST.json, source/ (retrieved bytes
+unmodified + .sha256 + RETRIEVAL.md), structure/ (the taxonomy), graph/ (nodes.json,
+edges.json, graph.sqlite, graph.ttl), concepts/, crosswalk/, app/, dist/.
+
+DISTRIBUTION, SPECIFIED AND NOT BUILT: <instrument>-v<n>.zip (the whole vault as plain
+folders and files — offline, greppable, archivable by a third party, no key needed once
+downloaded, which answers the verification objection and the delivery mechanism at once)
+and <instrument>-v<n>.sqlite (the graph as a queryable file). VERSIONED, NEVER
+OVERWRITTEN: a standards corpus that silently changes under a fixed filename is worse
+than no corpus.
+
+THE ARCHITECTURAL FORK, PUBLISHED RATHER THAN SETTLED (Q2): the commissioning memo said
+the vaults hold everything and the site is a projection. A later brief changed position —
+"vault authors, repo publishes" — on the ground that CLEAR TEXT IS WHAT ENABLES
+VERIFICATION. Ciphertext that decrypts in a browser is readable, but it is not greppable,
+diffable, archivable by a third party, or citable by a URL that will resolve in ten
+years. Resolution: both, with a stated division of labour. The vault is the working
+substrate and distribution unit and is canonical for DATA; the repo is the verification
+surface and citable address and is canonical for URLS.
+
+5.2 KEY DISCIPLINE  (/vaults/keys.html)
+
+READ KEYS YES, WRITE KEYS NEVER. sgit_rk1_ is a read key — a capability handed out on
+purpose, and a published read key cannot be turned back into a write key, which is a
+property of the scheme rather than a policy. The write prefix grants read AND write;
+publishing one hands the vault to anybody.
+
+WHAT CI ENFORCES on every push, before anything is tagged or deployed: the PREFIX may be
+discussed in prose (explaining why a write key is never published requires naming it, and
+a check that fired on every mention would be switched off within a week); KEY MATERIAL
+may not exist. Eight or more key-shaped characters after the write prefix fails the build
+in any file, always. Read keys must be exactly 64 hex characters.
+
+AUDIT BEFORE THE KEY, NOT AFTER. Revocation cannot retroactively protect ciphertext
+somebody already fetched. And scan HISTORY, not just the working tree — the one disclosed
+incident on this estate was a key in history.
+
+ESCROW IS A PRECONDITION OF PUBLISHING, NOT GOOD PRACTICE. "A vault that is readable and
+unwritable is not damaged but FROZEN, permanently readable by anybody holding the
+published key, never updatable, never revocable and never correctable." For a standards
+site that is the worst possible outcome: an instrument vault that cannot be updated is a
+permanently wrong copy of the law with your name on it. There is no key recovery.
+
+THE KEYS VAULT: a standalone top-level vault, never nested (a sub-vault split is an
+organisational boundary, NOT a confidentiality boundary from the parent's own readers).
+Its read key is never issued — there is no legitimate reason for one to exist. No agent
+and no CI job ever receives it; an agent publishing a vault receives one write key for
+one vault, scoped to that task. Its own recovery lives OUTSIDE the system it protects
+(printed and physical as primary, a hardware-backed password manager as secondary — not
+in another vault, which is the recursion with extra steps). A write key observed anywhere
+outside it is burned: new vault, migrate, republish, record the rotation.
+
+THE RECURSION, WHICH MUST BE ANSWERED BEFORE THE VAULT IS CREATED: if the keys vault's
+own write key is lost, every vault on the estate becomes frozen simultaneously and
+permanently — a worse outcome than never having built it.
+
+NO METERED CAPABILITY BEHIND A PUBLISHED READ KEY. Anything the key can spend, everybody
+can spend.
+
+Q6, OPEN: the Regulation Graph vault's PUBLIC.md carries <VAULT-KEY-REMOVED> and
+<READ-KEY-REMOVED> markers. A pre-publication audit found its own original write key AND
+another vault's plaintext credential in history; both were redacted, history rebuilt, and
+a re-audit from a read-key clone reported 205 files and zero findings. Handled and
+disclosed correctly. BUT the pages do not say whether the exposed key was ROTATED or only
+REMOVED, and by this estate's own doctrine removal alone does not undo distribution of
+already-fetched ciphertext. This is a question, not a claim of a vulnerability, and it
+should be answered before another vault publishes.
+
+5.3 TOOLS OUTSIDE THE VAULT  (/tools/)
+
+Three working precedents, so this is established practice rather than exploration:
+  - Private Health Score (zc6abngv) loads "a versioned JSON standard — five dimensions,
+    five bands, eight scoring rules — from the vault at runtime" and computes
+    deterministic results, separating rule-derived numbers from model-generated prose.
+    Read that with "standard" meaning ISO rather than health: THE STANDARD IS DATA IN THE
+    VAULT; THE TOOL IS CODE THAT READS IT.
+  - Risk Graph Explorer (3simlnqe) — vault data as live computation, seven views
+    recomputed simultaneously, amber for exposure, green for assurance, GHOSTED FOR
+    UNANSWERED, zero network calls, empty permissions.
+  - Regulation Graph's SQL and RDF views — the instrument queried as a database and as a
+    triple store.
+
+THE CONTRACT — read this and only this: MANIFEST.json, graph/nodes.json, graph/edges.json,
+graph/graph.sqlite, concepts/*.json, crosswalk/*.json.
+
+FIVE RULES: (1) version the contract, not just the data — declare which contract_version
+you speak and refuse politely rather than silently misreading a newer shape; (2) address
+by positional hash, never by array index or display label; (3) a tool never holds a write
+key; (4) a tool that computes must say what it computed from, including the hash of the
+provision's text; (5) a tool that cannot answer must say so visibly.
+
+FIVE TOOLS, RANKED:
+  T1 crosswalk browser — build first; the only tool that gets more valuable with each
+     instrument added. BLOCKED: zero crosswalks, so it would render an empty screen. It
+     cannot be faked, which is a virtue.
+  T2 conformance calculator — carries a standing framing warning in its own header:
+     findings and unanswered questions, NEVER a score, NEVER a pass.
+  T3 amendment differ — two versions in, changed provisions out, BY CONTENT HASH so it is
+     exact rather than textual. Blocked on data: the vault composes the amendment in
+     rather than storing the pre-amendment text as a version.
+  T4 citation resolver — SHIPPED. Sixty lines, client-side, no backend. Six input forms
+     normalise to one canonical alias; an input that does not normalise returns NOT FOUND
+     WITH THE FORM IT TRIED, not a nearest match, because a resolver that silently
+     resolves to the wrong provision is worse than one that fails.
+  T5 cross-vault search — hardest, most likely to want a real backend. Defer.
+
+WHERE A TOOL LIVES: the code in the repo (small, and it must be inspectable — the "clear
+text enables verification" argument applied to tools); the data in the vault; a copy of
+the tool inside flagship vaults so a downloaded zip is self-sufficient offline. Three
+delivery modes from one build.
+
+================================================================================
+6. WHAT IS NOT BUILT  (/shipped/)
+================================================================================
+
+One instrument modelled. ZERO crosswalks. No control catalogue in machine-readable form.
+No file export on any vault. No GDPR graph. Citations secondarily sourced.
+
+NINE GAPS: G1 any crosswalk at all (the biggest) · G2 a machine-readable control
+catalogue · G3 the GDPR graph · G4 zip and SQLite distribution · G5 a stable citation
+scheme — CLOSED BY THIS SITE, the first of the nine · G6 a timeline/dates structure ·
+G7 an amendment-detection pipeline (the business argument rests entirely on a mechanism
+that does not exist) · G8 certification and attestation mechanics · G9 PUBLIC.md as a
+real convention.
+
+Also: a strategy brief on risk-acceptance and standards crosswalks is referenced twice in
+the source material and IS NOT ON DISK. It is the closest thing to a crosswalk document
+that ever existed. Recover it before writing G1 from scratch.
+
+EIGHT TENSIONS, HELD RATHER THAN RESOLVED:
+  1. The site is called "standards" and is three-quarters law.
+  2. The best content and the biggest legal blocker are the same subject (ISO).
+  3. Encryption is the product and clear text is what enables verification.
+  4. "The amendment is the business model" — and the flagship vault has two commits.
+  5. The project criticises secondary sourcing and is itself secondarily sourced.
+  6. Evidence, not verdicts — but people want verdicts. The refusal is the differentiator
+     AND the standing sales objection.
+  7. A keys vault concentrates every credential into one artefact.
+  8. One instrument done properly is a stronger position than five done thinly, and reads
+     as less. "Resist filling the shelf."
+
+THE WARNING THIS SITE IS MOST EXPOSED TO: "Publishing security reviews and deployment
+guidance is useful; implying regulatory readiness that has not been established is the
+easiest way to create an obligation nobody has met."
+
+================================================================================
+7. DISCLOSURE, NETWORK AND LICENSING
+================================================================================
+
+PARTICIPANT DISCLOSURE (/about/participant.html): this site is published by the project
+that builds the vault layer these instruments run on. A site arguing that vaults are the
+right substrate for normative material is arguing for its publisher's product. The check
+is available: the graph is fetchable JSON, the hashes are recomputable, the sources are
+published raw, the repository history is public, and the gaps are more prominent than the
+achievements. And a harder version of the same problem: "A PARTICIPANT CANNOT OWN THE
+REGISTER" — one more reason nothing here outputs a verdict.
+
+WHERE THIS APPROACH LOSES: if you need an answer this afternoon; if you need coverage
+across many instruments; if you need ISO text; if your auditor wants a percentage; if you
+need a maintained commercial product (the amendment-detection pipeline does not exist);
+and if you are checking whether anyone did this first — they did, and the prior art is
+named.
+
+NETWORK BOUNDARIES (/network/): risks.sgit.ai owns the register and the acceptance
+decision, this site owns the provision and the arithmetic (Q1 is the live deconfliction).
+graphs.sgit.ai owns the general graph theory; this site owns its application to legal
+instruments. pki.sgit.ai supplies the house pattern and the build pipeline, with no
+content overlap. sgit.ai hosts the vault estate and its catalogue stays canonical for the
+estate-wide index. THE RULE: cross-link page to page, not domain to domain.
+
+LICENSING — what may be republished: EU law YES (official Formex XML from CELLAR) · NIST
+YES (US government work, public domain) · OWASP YES (CC-licensed, but check the specific
+licence per project, they are not uniform) · MITRE YES with attribution · CycloneDX and
+SPDX yes in their open forms, but the ISO-numbered twins (ISO/IEC 5962, 20153) are the
+paywalled versions · Akoma Ntoso, ELI, ECLI, LegalRuleML YES · ISO/IEC ALL NO ·
+SOC 2 and PCI DSS assume no.
+
+This site's own writing is CC BY 4.0, attributed to Dinis Cruz with AI co-authorship.
+
+================================================================================
+8. EVERY PAGE
+================================================================================
+
+/index.html · /index.md
+/method/index.html · /method/grammar.html · /method/crosswalks.html ·
+  /method/citation.html · /method/ladder.html
+/instruments/index.html
+/eu-ai-act/index.html · /eu-ai-act/worked-example.html · /eu-ai-act/status.html ·
+  /eu-ai-act/provisions/index.html · /eu-ai-act/provisions/art-026-para-05.html ·
+  /eu-ai-act/provisions/art-026-para-06.html · /eu-ai-act/provisions/art-009-para-05.html ·
+  /eu-ai-act/provisions/art-099.html · /eu-ai-act/eu-ai-act.json
+/gdpr/index.html · /iso-27001/index.html · /iso-31000/index.html
+/subsets/index.html · /subsets/agentic-access/index.html
+/vaults/index.html · /vaults/keys.html
+/tools/index.html · /tools/resolver.html · /tools/resolver.js
+/agents/index.html · /agents/grammar.json · /agents/vaults.json
+/shipped/index.html · /about/participant.html · /network/index.html
+/documents/index.html and eleven reader pages · /briefs/<filename>.md
+/admin/index.html · /admin/comms.html · /admin/versions.html
+/llms.txt · /llms-full.txt · /sitemap.xml · /robots.txt

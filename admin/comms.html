@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comms: tasks, requests and open questions · standards.sgit.ai</title>
+<meta name="description" content="The working channel between the project lead and the site agent, kept in public: eight requests, ten tasks, and nine open questions published unresolved — including whether an exposed vault key was rotated or only removed from history.">
+<link rel="canonical" href="https://standards.sgit.ai/admin/comms.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / admin / comms</div>
+<h1>Comms: tasks, requests &amp; open questions</h1>
+<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.0</b>, 24 August 2026. Full history: <a href="versions.html">versions</a>.</p>
+
+<h2 id="needs">Needed from the project lead</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Request</th><th>Why it blocks</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>N1</td><td><b>GitHub Pages and the custom domain.</b> The repository defaults to <code>dev</code> and Pages is enabled; the full pipeline (validate → tag → deploy) is in place. What remains is confirming that <code>standards.sgit.ai</code> resolves and that the <code>github-pages</code> environment permits deploys from <code>dev</code></td><td>Nothing publishes until DNS and the environment agree</td><td><span class="tstat t-doing">in progress — first pipeline run</span></td></tr>
+    <tr><td>N2</td><td><b>Answer Q6: was the exposed vault key rotated, or only removed from history?</b> The Regulation Graph vault disclosed an audit finding that its own write key and another vault's credential were in history. Both were redacted and the history rebuilt. <b>The pages do not say whether the key was rotated.</b> By this estate's own doctrine, removal alone does not undo distribution of ciphertext somebody already fetched</td><td><b>Should be answered before another vault publishes</b>, and it is the first entry the keys vault's audit log should carry. <a href="../vaults/keys.html#open">Detail →</a></td><td><span class="tstat t-need">waiting on human</span></td></tr>
+    <tr><td>N3</td><td><b>Decide Q1 — who owns the Article 26(5) worked example.</b> It is the strongest asset for this site <em>and</em> for risks.sgit.ai, and it already appears in that site's material. Proposed: <b>risks owns the register and the acceptance decision; standards owns the provision and the arithmetic</b>, one canonical copy, the other links in. <b>This needs a decision, not a convention</b></td><td>Both sites currently carry it. Duplication is the cheapest thing to fix now and the most expensive later</td><td><span class="tstat t-need">waiting on human</span></td></tr>
+    <tr><td>N4</td><td><b>Confirm the name.</b> The evidence is against the word <em>standards</em> — the material is ~72% law, ~20% framework, ~8% actual standards. The recommendation is to keep it <b>on one condition</b>: the three-way distinction is the front page's first substantive claim and every instrument page carries the label. <b>Both conditions are met and CI enforces the second.</b> The honest runner-up is <code>regulations.sgit.ai</code></td><td>A rename after the first external citation is expensive; before it, it is free</td><td><span class="tstat t-doing">proceeding with “standards” unless redirected</span></td></tr>
+    <tr><td>N5</td><td><b>Commission the re-derivation pass.</b> Every AI Act citation on this site needs re-deriving from the operative text, with the retrieval recorded. Until then no operative text is published here. <b>Start with the Article 99 third tier</b> (1% vs 1.5%), because it is the number most likely to be quoted out of this site</td><td>The site's own thesis. <a href="../eu-ai-act/status.html#w1">Status →</a></td><td><span class="tstat t-need">waiting on human</span></td></tr>
+    <tr><td>N6</td><td><b>Answer Q3 — can the ontology hold a standard it cannot quote?</b> The model assumes provision text as a node property, and for ISO that text cannot be stored. Is a hollow provision node the same kind of thing or a different one?</td><td><b>The ISO folder cannot be designed until this is answered.</b> <a href="../iso-27001/index.html#hollow">Detail →</a></td><td><span class="tstat t-open">open</span></td></tr>
+    <tr><td>N7</td><td><b>Recover the missing crosswalk brief.</b> A strategy brief on risk-acceptance and standards crosswalks is referenced twice in the source material and is not on disk. It is the closest thing to a crosswalk document that ever existed</td><td>Recover it before writing <a href="../shipped/index.html#g1">G1</a> from scratch</td><td><span class="tstat t-open">open</span></td></tr>
+    <tr><td>N8</td><td><b>Decide about the <code>dev.</code> hosts.</b> Both the vault viewer and the ciphertext API are <code>dev.</code>-prefixed. A production standards site whose proposition is durable citation depending on infrastructure named <em>dev</em> is a risk worth naming now</td><td>Not blocking today; blocking the first time somebody cites this site in something permanent</td><td><span class="tstat t-open">open</span></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="board">Task board</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Task</th><th>Owner</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>T1</td><td><b>CI pipeline and auto-tagging</b> — validate → tag → deploy, ported from pki.sgit.ai, with the key-leak check extended to write-key material and a new check enforcing the instrument-labelling condition</td><td>site agent</td><td><span class="tstat t-done">done</span></td></tr>
+    <tr><td>T2</td><td><b><a href="../method/index.html">/method/</a></b> — build order 1. The grammar, the two-hash scheme, crosswalks, the citation scheme, the grounding ladder</td><td>site agent</td><td><span class="tstat t-done">done</span></td></tr>
+    <tr><td>T3</td><td><b><a href="../eu-ai-act/index.html">/eu-ai-act/</a></b> — build order 2. Points at the existing Regulation Graph vault rather than rebuilding it; four provisions, the worked example, the status page</td><td>site agent</td><td><span class="tstat t-done">done</span></td></tr>
+    <tr><td>T4</td><td><b><a href="../tools/resolver.html">The citation resolver</a></b> — closes gap G5, the only one of the nine closed so far</td><td>site agent</td><td><span class="tstat t-done">done</span></td></tr>
+    <tr><td>T5</td><td><b>Resolve the Article 99 third tier</b> against the operative text and publish it with a retrieval record</td><td>needs N5</td><td><span class="tstat t-need">blocked</span></td></tr>
+    <tr><td>T6</td><td><b>Write the first crosswalk.</b> AI Act ↔ GDPR is the natural pair — they apply concurrently. Unblocks the crosswalk browser</td><td>site agent</td><td><span class="tstat t-open">next</span></td></tr>
+    <tr><td>T7</td><td><b>Define bridge strength</b> — the scale behind “shades of compliance”. Q4</td><td>site agent + lead</td><td><span class="tstat t-open">open</span></td></tr>
+    <tr><td>T8</td><td><b><code>/owasp/</code></b> — the best first non-law page: deep, public, CC-licensed, no copyright problem, and the only framework written for the agentic case</td><td>site agent</td><td><span class="tstat t-open">open</span></td></tr>
+    <tr><td>T9</td><td><b>Zip and SQLite distribution</b> in <code>dist/</code>. Net-new across the whole estate</td><td>platform</td><td><span class="tstat t-open">open</span></td></tr>
+    <tr><td>T10</td><td><b><code>PUBLIC.md</code> on the other ten vaults.</b> On 2 of 12 today, which is not a convention</td><td>platform</td><td><span class="tstat t-open">open</span></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="open">Open questions, published unresolved</h2>
+<p>Following the house convention of numbering open questions in public. An unanswered question is an output.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Question</th><th>Where it stands</th></tr></thead>
+  <tbody>
+    <tr><td><b>Q1</b></td><td><b>Who owns the Article 26(5) worked example — standards or risks?</b></td><td>Proposed split published on both <a href="../eu-ai-act/worked-example.html#not">this site</a> and in the risks material. <b>Needs a decision.</b> N3</td></tr>
+    <tr><td><b>Q2</b></td><td><b>Does the vault or the repo hold the canonical text?</b> The memo says vault; a later brief changed position to “vault authors, repo publishes” because <b>clear text is what enables verification</b></td><td><a href="../vaults/index.html#fork">Published as a fork</a> with a stated division of labour, rather than settled. This is the intended resolution, not an evasion</td></tr>
+    <tr><td><b>Q3</b></td><td><b>Can the ontology hold a standard it cannot quote?</b></td><td>Unaddressed anywhere. <b>The ISO folder cannot be designed until it is answered.</b> N6</td></tr>
+    <tr><td><b>Q4</b></td><td><b>What is a bridge's strength, formally?</b> A crosswalk that can only say <em>yes</em> is wrong or useless. The phrase is “shades of compliance”; there is no scale</td><td>Blocks the crosswalk browser. <a href="../method/crosswalks.html#basis">Detail →</a></td></tr>
+    <tr><td><b>Q5</b></td><td><b>When does a composed instrument stop being trustworthy?</b> The AI Act vault composes two regulations because no official consolidation exists — genuinely valuable, and <b>an unofficial text that looks official</b>. What is the labelling obligation?</td><td>The staleness probe found <em>a text that never was the law</em> in the wild. <a href="../eu-ai-act/status.html#composed">This site must not become another instance</a></td></tr>
+    <tr><td><b>Q6</b></td><td><b>Was the exposed vault key rotated, or only removed from history?</b></td><td>Open. <b>Answer before publishing another vault.</b> N2</td></tr>
+    <tr><td><b>Q7</b></td><td><b>Does the method survive instrument two?</b></td><td>Untested. <a href="../gdpr/index.html#harder">GDPR is the test</a>, and there is reason to think it needs special cases</td></tr>
+    <tr><td><b>Q8</b></td><td><b>Should the site be multilingual?</b> Authority anchoring gives one identifier and many labels for free, and EU instruments ship in 24 languages against the same structure</td><td>A real differentiator nobody has claimed. Also a standing maintenance commitment. <a href="../method/index.html#anchoring">Detail →</a></td></tr>
+    <tr><td><b>Q9</b></td><td><b>Is <code>standards</code> the right name?</b></td><td>Keep it, conditional on the LAW/STANDARD/FRAMEWORK labelling — <b>and the condition is now enforced by CI</b>. Honest runner-up: <code>regulations.sgit.ai</code>. N4</td></tr>
+  </tbody>
+</table></div>
+
+<div class="pagenav"><a href="../network/index.html">← The network</a> <a href="versions.html">Release history →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

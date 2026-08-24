@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://standards.sgit.ai/sitemap.xml

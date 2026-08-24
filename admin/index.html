@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin & engineering — how this site is built · standards.sgit.ai</title>
+<meta name="description" content="Hand-written static HTML with programmatically injected chrome, gated by a five-check pre-release validator, auto-tagged and deployed to GitHub Pages. Including why the instrument-labelling condition is enforced by CI rather than remembered.">
+<link rel="canonical" href="https://standards.sgit.ai/admin/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl here" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / admin</div>
+<h1>Admin &amp; engineering</h1>
+<p class="lead">How this site is built, validated, tagged and deployed. It is hand-written static HTML with programmatically injected chrome, gated by a pre-release validator, on the same pipeline as <a href="https://pki.sgit.ai">pki.sgit.ai</a> and the rest of the network — because a site arguing for verifiable provenance should be reproducible by anybody who clones it.</p>
+
+<h2 id="pipeline">The pipeline</h2>
+<pre class="shell">push to <span class="y">dev</span>
+   |
+   +-- <span class="g">1. validate</span>    node admin/build/validate.js
+   |        version agreement · internal links · canonical/CNAME ·
+   |        key-leak tripwire · instrument labelling
+   |        <span class="y">a failure stops the release: no tag, no publish</span>
+   |
+   +-- <span class="g">2. tag-release</span>  v{release}.{major}.{minor}
+   |        version.txt must agree with the release commit's subject
+   |        the bump must be the next minor (or a deliberate major)
+   |        historical releases are backfilled from commit subjects
+   |
+   +-- <span class="g">3. deploy</span>      GitHub Pages, from the tagged commit</pre>
+<p>Pull requests run validation only — branch work is gated before it ever reaches the release branch. A push to <code>main</code> is deploy-only, so <code>main</code> can serve as a deploy test or fallback.</p>
+
+<h2 id="checks">What the validator checks</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Check</th><th>Why it exists</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>Version agreement</b></td><td><code>version.txt</code> against every page's nav badge, this site's versions table, <code>llms.txt</code>, <code>llms-full.txt</code> and <code>index.md</code> — and each release appears in the table exactly once, because a blanket version-bump <code>sed</code> that touches the history table produces duplicates, which shipped once on a sibling site</td></tr>
+    <tr><td>2</td><td><b>Internal links</b></td><td>Every relative <code>href</code> and <code>src</code> resolves to a file in the tree. Fragments <em>and query strings</em> are stripped — this site ships a resolver whose links carry a query, which the inherited check would have failed</td></tr>
+    <tr><td>3</td><td><b>Canonical host</b></td><td>Every <code>rel="canonical"</code> and <code>og:url</code> points at the host in <code>CNAME</code>, and <b>every page declares one</b></td></tr>
+    <tr><td>4</td><td><b>Key-leak tripwire</b></td><td><a href="../vaults/keys.html#ci">Detail →</a>. The prefix may be discussed; <b>key material may not exist</b>. Read keys must be exactly 64 hex characters, and the write prefix followed by eight or more key-shaped characters fails the build in any file, always</td></tr>
+    <tr><td>5</td><td><b>Instrument labelling</b></td><td>New for this site. Every instrument page must carry a <b>LAW / STANDARD / FRAMEWORK</b> label and a republishable mark in its header. <a href="#condition">This is a condition, not a style rule →</a></td></tr>
+  </tbody>
+</table></div>
+
+<div class="note" id="condition"><b>Why a labelling rule is enforced by CI.</b> Keeping the name <code>standards</code> was recommended <em>conditionally</em>: the evidence is against the word — the material is roughly 72% law, 20% framework and 8% actual standards — and the recommendation was to keep it only if the three-way distinction became <a href="../index.html#three">the front page's first substantive claim</a> and every instrument page carried the label.
+<p style="margin:.6rem 0 0">A condition that lives in a brief is a condition somebody forgets on the fourth instrument. A condition in the pre-release gate is one the build enforces. <b>That is the difference between a stated intention and a property of the site</b>, and it is the same argument this site makes about everything else.</p></div>
+
+<h2 id="release">Release process</h2>
+<ol class="order">
+  <li>Bump <code>admin/build/version.txt</code> — <b>exactly once per release</b> — and add a row to <a href="versions.html">the versions table</a>; update <a href="comms.html">comms</a>.</li>
+  <li><code>python3 admin/build/chrome.py</code> — propagates the version badge and any nav or footer change to every page, and stamps the text twins.</li>
+  <li><code>node admin/build/validate.js</code> — must print OK.</li>
+  <li><code>git commit -am "site vX.Y.Z: ..." &amp;&amp; git push origin dev</code></li>
+</ol>
+<p>The commit subject is load-bearing: CI reads the version out of it and refuses to tag if it disagrees with <code>version.txt</code>.</p>
+
+<h2 id="layout">Repository layout</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Path</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr><td><code>admin/build/chrome.py</code></td><td><b>The single definition of the nav and footer</b>, applied across every page. Pages are hand-written; the chrome is not hand-maintained, which is what stops a thirty-page site from drifting</td></tr>
+    <tr><td><code>admin/build/validate.js</code></td><td>The pre-release gate. Five checks, no dependencies</td></tr>
+    <tr><td><code>admin/build/version.txt</code></td><td>Owns the version. The only place it is edited by hand</td></tr>
+    <tr><td><code>assets/site.css</code></td><td>The shared stylesheet — the sgit.ai design language, ported from pki.sgit.ai with an indigo accent and a block of additions this site needs: instrument labels, republishability marks, provision cards, hash chips and the ghosting convention</td></tr>
+    <tr><td><code>briefs/</code></td><td>The source documents, verbatim. <b>The raw markdown is the source of truth</b>; <a href="../documents/index.html">/documents/</a> is presentation</td></tr>
+    <tr><td><code>&lt;instrument&gt;/</code></td><td>One folder per instrument, the same eight sections each. <a href="../instruments/index.html#shape">The shape →</a></td></tr>
+    <tr><td><code>&lt;instrument&gt;/&lt;instrument&gt;.json</code></td><td>The per-instrument endpoint, constructible from the slug</td></tr>
+    <tr><td><code>tools/resolver.js</code></td><td>The citation resolver. Sixty lines, no dependencies, no build step — <a href="../tools/index.html#where">the tool's code lives in the repo precisely so it is inspectable</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="repro">Reproducing a claim from this site</h2>
+<p>Two of the site's own assertions are checkable in one command each, which is the point:</p>
+<pre class="shell"># a positional hash is sha256 of the address, truncated
+$ printf 'eu-ai-act/art-026-para-05' | shasum -a 256 | cut -c1-16
+<span class="g">d8fc6df65f292bf3</span>
+
+# the whole instrument, as data
+$ curl -s https://standards.sgit.ai/eu-ai-act/eu-ai-act.json | jq '.provenance.known_weaknesses'</pre>
+
+<div class="pagenav"><a href="versions.html">← Release history</a> <a href="../network/index.html">The network →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

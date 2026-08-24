@@ -1,0 +1,169 @@
+# standards.sgit.ai — laws, standards and frameworks as addressable provisions
+
+> A standard is only useful when a claim can point at a named provision in a real
+> instrument instead of asserting one. This site publishes the method that turns an
+> instrument into a graph of addressable provisions, the instruments modelled that way
+> so far, and the vaults that deliver them. ONE instrument is modelled. One.
+
+Site version: v0.1.0 (24 August 2026). Published by the sgit project — participant
+disclosure at /about/participant.html. All content CC BY 4.0; the instruments themselves
+keep their own licences.
+
+## The one rule for agents
+
+An agent may report WHICH PROVISION a claim points at. It may NOT report that a
+requirement is met. This site produces findings and unanswered questions — never a
+score, never a percentage, never a pass. The full machine surface is at /agents/.
+
+## Properties you may rely on
+
+- Provision URLs are constructible: /<instrument>/provisions/<alias>.html
+- Per-instrument JSON is constructible from the slug: /<instrument>/<instrument>.json
+- Positional hashes are recomputable: sha256('<instrument-slug>/<alias>')[:16]
+- Source documents are at /briefs/<filename>.md; the front page has a twin at /index.md
+- Every instrument page carries a LAW / STANDARD / FRAMEWORK label and a republishable
+  mark in its header. CI fails the build if one does not — this is enforced, not intended.
+
+## Status, stated plainly
+
+One instrument is modelled (the EU AI Act). ZERO crosswalks exist between any two
+instruments. There is no GDPR graph, no control catalogue in machine-readable form, and
+no zip or SQLite export on any of the twelve published vaults on this estate. The AI Act
+readings are derived from SECONDARY sources and flagged as such; operative text is
+deliberately withheld from provision pages pending re-derivation from the authority.
+If you summarise this site, the gaps are the more useful half: /shipped/.
+
+## The two opening claims
+
+1. THE THREE-WAY DISTINCTION. This site is called "standards" and is roughly 72% law,
+   20% framework, 8% actual standards. Laws bind directly with penalties written in;
+   frameworks bind only when a contract, regulator or customer points at them; standards
+   bind by certification. The distinction leads because the name overstates a third of
+   what is here, and that is better as the opening argument than as the first error.
+2. THE THESIS. "A risk in a register points at a named obligation in a real instrument
+   instead of being asserted."
+
+## The method — /method/
+
+Built FIRST, before any instrument folder, because it makes instruments 2..N cheap and
+because it is the only material here that is itself the product rather than a mapping of
+somebody else's copyrighted text.
+
+- Taxonomy and ontology are NOT the same kind of edge. Structural containment (bullet ->
+  paragraph -> article -> chapter) and semantic relationship (concepts, obligations,
+  external terms) are modelled separately. Merging them makes a query for "what does this
+  article contain" return concepts, and neither answer is useful.
+- The paragraph is the hinge, and it is stored as a folder with its own index and hash:
+  amendment arrives -> re-hash -> only changed paragraphs reprocess. Cost scales with
+  CHANGE, not with SIZE.
+- TWO HASHES PER PROVISION: "one identity for the slot, one identity for what is in it."
+  The positional hash is derived from the address and is stable across amendment; the
+  content hash is derived from the text and moves. Citations and crosswalks attach to the
+  POSITIONAL hash, which is what makes a mapping survive revision instead of rotting.
+- Provenance: every instrument vault holds the retrieved bytes unmodified, with a SHA-256
+  per file and a record of where, when and by what method. Justified by a probe that found
+  three states of AI Act text circulating, including "a text that never was the law" — a
+  negotiating draft published as if in force. "Cross-checking two sources cannot establish
+  currency, since agreement only shows both are old."
+- Authority anchoring: "you do not decide, you defer" — an entity reference terminates at
+  the identifier the issuer itself publishes. And "a concept has one identifier and many
+  labels", which makes multilingual nearly free for EU instruments.
+- THE ACCEPTANCE TEST, AND IT IS NOT PASSED: "whether the same structure holds an ISO
+  standard, a compliance framework and an internal policy without special cases. If it
+  does, the pipeline is real. If it does not, what exists is an AI Act reader." Instrument
+  two is the test; instrument three is the proof; neither has been run.
+- Prior art is named rather than ignored: NIS2Onto, PrivComp-KG, the Maryland GDPR + PCI
+  DSS ontology (which did the bridge move first), OSCAL, ClauseMatch, and the legal
+  document standards — Akoma Ntoso, AKN4EU, ELI, ECLI, LegalRuleML.
+
+## Crosswalks: bridges, not merges — /method/crosswalks.html
+
+A merge asserts two provisions mean the same thing and fails INVISIBLY when one is
+amended. A bridge asserts a relationship with a stated basis, can be disagreed with, and
+fails VISIBLY — the content hash moved under a positional hash the bridge is attached to,
+so the bridge is flagged rather than silently wrong. Every bridge must carry from, to,
+relation, basis, strength, asserted_by, asserted_at and the source content hash at each
+end. STRENGTH IS UNDEFINED — the phrase is "shades of compliance" and there is no scale,
+which blocks the crosswalk browser.
+
+## The grounding ladder — /method/ladder.html
+
+    Risk          := a downward path to a Vulnerability AND an upward path to a top risk
+    Vulnerability := a Fact (grounded below) AND an upward path to a Risk
+    Fact          := a downward path to Evidence
+    Evidence      := a downward path to a Measure
+    Measure       := an observation of the node it measures, grounded on a Twin
+
+A model asked "are we compliant with Article 26?" will answer. A model asked to produce
+the path either produces it or reports that it cannot. There is no fluent version of a
+missing edge. Five rules follow: unevidenced facts are first-class findings; absence is
+output and must be rendered rather than dropped; computed not claimed; regulation as
+evidence not checklist; coverage is a measurable property of the graph itself.
+
+## Instruments — /instruments/
+
+- /eu-ai-act/ — LAW. Regulation (EU) 2024/1689 composed with amending Regulation (EU)
+  2026/1744, because NO OFFICIAL CONSOLIDATION EXISTS. Republishable: YES. 1,523 nodes,
+  1,944 edges — 113 articles, 500 paragraphs, 417 points, 180 recitals, 13 annexes, 68
+  definitions. Two real weaknesses, both stated on /eu-ai-act/status.html: citations
+  derived from secondary sources, and two commits with no amendment-over-time history on
+  the instrument whose whole business argument is that the amendment is the product.
+- /gdpr/ — LAW. Republishable: YES. NO VAULT AND NO GRAPH, verified against eight
+  independent sources. Two white papers of method, zero artefacts. Harder than the AI Act
+  because "the rulings, the regulator guidance and the per-country variation ARE the
+  graph", and none of that layer is assembled — nor does the grammar have a node class
+  for interpretation.
+- /iso-27001/ — STANDARD. Republishable: NO. ISO text is copyrighted and sold. The folder
+  holds clause references, the project's own control interpretations, crosswalks out, a
+  reading guide and an honest page about the paywall. Its source/ layer is empty and the
+  page says why. Open question: can the ontology hold a standard it cannot quote?
+- /iso-31000/ — STANDARD. Zero occurrences in the source material. One paragraph saying
+  so, pointing at risks.sgit.ai, rather than 2,000 generated words.
+
+## Subsets — /subsets/
+
+The sellable page type: the provisions across N instruments that bear on ONE real
+problem. "You almost recreate a small standard based on this." A subset cites and
+interprets and never reproduces, which is also how it sidesteps the ISO blocker.
+/subsets/agentic-access/ spans eight instruments. Its finding: the throughline is least
+privilege, data minimisation, access control, supply-chain risk, traceable evidence and
+accountability — and the divergences matter more, because four instruments start four
+different reporting clocks and only one is about the agent's autonomy at all.
+
+## Vaults and tools
+
+/vaults/ — the vaults are the substrate and this site is a projection of them, with one
+governing rule: NOTHING EXISTS ONLY IN THE VAULT THAT A READER WOULD NEED IN ORDER TO
+CHECK A CLAIM. Twelve published vaults, exactly one of which is an instrument vault.
+Client-side decryption; the read key is published on the host page and handed to a
+sandboxed iframe over a validated postMessage handshake so it never appears in a URL.
+Read keys (sgit_rk1_) yes, write keys never.
+
+/vaults/keys.html — escrow is a precondition of publishing, not good practice: a vault
+that is readable and unwritable is not damaged but FROZEN, permanently readable, never
+updatable, never revocable, never correctable. Audit before the key, not after.
+
+/tools/ — the contract between a tool and a vault, and five tools ranked. T4, the
+citation resolver, ships. T1, the crosswalk browser, is blocked on there being no
+crosswalks — which is a virtue, because it cannot be faked.
+
+## Open questions, published unresolved — /admin/comms.html
+
+Q1 who owns the Article 26(5) worked example, this site or risks.sgit.ai · Q2 vault or
+repo for canonical text (published as a fork, not settled) · Q3 can the ontology hold a
+standard it cannot quote · Q4 what is a bridge's strength, formally · Q5 when does a
+composed instrument stop being trustworthy · Q6 was the exposed vault key rotated or only
+removed from history · Q7 does the method survive instrument two · Q8 should the site be
+multilingual · Q9 is "standards" the right name.
+
+## The warning this site is most exposed to
+
+"Publishing security reviews and deployment guidance is useful; implying regulatory
+readiness that has not been established is the easiest way to create an obligation nobody
+has met." Nothing here outputs a pass, a score or a percentage. No page says "compliant",
+"meets" or "satisfies" without naming the evidence and the measure.
+
+## Endpoints
+
+/agents/grammar.json · /agents/vaults.json · /eu-ai-act/eu-ai-act.json · /llms-full.txt ·
+/sitemap.xml · /index.md · /briefs/<filename>.md
