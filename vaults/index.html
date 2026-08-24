@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The vaults — the delivery surface · standards.sgit.ai</title>
+<meta name="description" content="How an encrypted vault reaches a reader: client-side decryption, a published read key, a postMessage handshake so the key never appears in a URL. The twelve published vaults, the instrument vault layout, and the zip and SQLite distribution that is specified and not built.">
+<link rel="canonical" href="https://standards.sgit.ai/vaults/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="standards.sgit.ai">
+<meta property="og:url" content="https://standards.sgit.ai/vaults/index.html">
+<meta property="og:title" content="The vaults — the delivery surface">
+<meta property="og:description" content="The vaults are the substrate and this site is a projection of them, with one governing rule: nothing exists only in the vault that a reader would need in order to check a claim.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / vaults</div>
+<h1>The vaults — the delivery surface</h1>
+<p class="lead">The vaults are the substrate; this site is a projection of them. They hold the source bytes, the transformations, the graph JSON, the SQLite builds, the apps and the tools. This page states plainly how one reaches a reader, prints the read keys, and is honest about the two things that are not built.</p>
+
+<p class="claim">Nothing exists only in the vault that a reader would need in order to check a claim.</p>
+
+<h2 id="mechanism">How a vault actually reaches you</h2>
+<p>Readers of a standards site will want to know what they are trusting, so here it is, established by survey rather than assumed:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+  <tbody>
+    <tr><td><b>Ciphertext origin</b></td><td><code>dev.send.sgraph.ai</code> — an API that serves encrypted objects and has no UI</td></tr>
+    <tr><td><b>Viewer</b></td><td><code>dev.vault.sgraph.ai</code> — the browser application that decrypts and renders</td></tr>
+    <tr><td><b>Decryption</b></td><td><b>Client-side, in your browser</b>, with the read key printed on the host page. The server never holds the key</td></tr>
+    <tr><td><b>Credential format</b></td><td><code>&lt;readkey&gt;:&lt;vaultid&gt;</code></td></tr>
+    <tr><td><b>Embedding</b></td><td>A sandboxed iframe — <code>sandbox="allow-scripts"</code>, opaque origin. The host page hands the key over <b>a validated <code>postMessage</code> handshake rather than a URL fragment</b>, so the key never appears in any URL and is never written to the frame's storage; it lives in the frame's memory for the session</td></tr>
+    <tr><td><b>What the key grants</b></td><td><b>Read only.</b> A published read key cannot be turned back into a write key. That is a property of the scheme, not a policy</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="keys">The two prefixes</h2>
+<div class="warnbox"><b>Read keys yes, write keys never.</b> <code>sgit_rk1_</code> is a read key — a capability handed out on purpose, and every one on this page is published deliberately. The write prefix is a different thing entirely: it grants read <em>and</em> write, and publishing one hands the vault to anybody.
+<p style="margin:.6rem 0 0">This site's CI enforces the distinction rather than trusting it. <b>Every push is checked for the write prefix anywhere in the tree</b>, and every read key must be exactly 64 hex characters or the build fails. <a href="keys.html">Key discipline, and the incident that motivated the check →</a></p></div>
+
+<h2 id="estate">The published estate — twelve vaults</h2>
+<p>Surveyed 23 August 2026. <b>Exactly one is an instrument vault.</b> The rest are the estate this site's own vaults will join; the <a href="https://sgit.ai/demos/vaults/index.html">catalogue on sgit.ai</a> stays canonical for the estate-wide index.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Vault</th><th>Files</th><th>Size</th><th>Commits</th><th>Presentation</th><th>PUBLIC.md</th><th></th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://sgit.ai/demos/vaults/field-notes/index.html"><b>Field Notes</b></a><br><span class="dim small"><code>4bshby5n</code> · application</span></td><td>4</td><td>11 KB</td><td>2</td><td>HTML app (index.html)</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_2848993a68c02a33ea5582902c391901191e53680d35b36c0e76185d4107ad81%3A4bshby5n">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/strategy-maps/index.html"><b>Strategy Maps</b></a><br><span class="dim small"><code>ookq4mn4</code> · structured analysis</span></td><td>33</td><td>830 KB</td><td>3</td><td>2 HTML apps</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_451c4c1e28fbb24a7f350bb3f107b2c103d69ed363167029ef9c9000ff76c07b%3Aookq4mn4">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/deploy-docs/index.html"><b>Deploy Docs</b></a><br><span class="dim small"><code>fyofmkvr</code> · record-keeping</span></td><td>17</td><td>25 KB</td><td>2</td><td>Markdown, no app</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_8d01421290efc3fa03205eced0534335a06ae209d627555b3dde136b878e3de1%3Afyofmkvr">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/the-vault-catalogue/index.html"><b>The Vault Catalogue</b></a><br><span class="dim small"><code>kc67yhgw</code> · record-keeping</span></td><td>9</td><td>11 KB</td><td>2</td><td>Markdown, no app</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_fd71e4bde7232498e43a5da869b1501260d9d403031b20af87b5bc801bdf6280%3Akc67yhgw">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/algarve-may-2026/index.html"><b>Algarve May 2026</b></a><br><span class="dim small"><code>3d04e6b9ca98</code> · gallery</span></td><td>71</td><td>29 MB</td><td>36</td><td>HTML app</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_0a0f34839d737eef0f8f66e5236990b1f397af064763e3f71dca2717015f9d15%3A3d04e6b9ca98">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/supplement-stack/index.html"><b>Supplement Stack</b></a><br><span class="dim small"><code>r7zes477</code> · record-keeping</span></td><td>23</td><td>2.3 MB</td><td>5</td><td>HTML app</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_047186b559528058c66d1792b7345639b1238cb95c166d1d5f5b65c59813c2ee%3Ar7zes477">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/risk-mandate/index.html"><b>Risk Mandate</b></a><br><span class="dim small"><code>4zf6pf2z</code> · application</span></td><td>124</td><td>1.9 MB</td><td>98</td><td>8 HTML app entries</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_a702fba803faac4369eb5d5a320b4dfa017af62bd2425fb298aac4b99e95c0ae%3A4zf6pf2z">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/agentic-browser-isolation/index.html"><b>Agentic Browser Isolation</b></a><br><span class="dim small"><code>0610gsp9</code> · structured analysis</span></td><td>104</td><td>2.4 MB</td><td>4</td><td>17 app entries</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_92cad4cea8f58c55f59b686c71c935225a1ba7c41ecb6922a8aa570467604f6e%3A0610gsp9">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/risk-graph-explorer/index.html"><b>Risk Graph Explorer</b></a><br><span class="dim small"><code>3simlnqe</code> · application</span></td><td>33</td><td>428 KB</td><td>7</td><td>1 HTML app (tool)</td><td><b class="yes">yes</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_1c1b95f5903e35850a9bc0541ffa09c6b5d4017cbf18817d2ad6f894127e5638%3A3simlnqe">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/private-health-score/index.html"><b>Private Health Score</b></a><br><span class="dim small"><code>zc6abngv</code> · application</span></td><td>35</td><td>1.2 MB</td><td>3</td><td>HTML app (tool)</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_a76f327fb602f1619a67a15a0b756d69e82a1f7fa48438d4b6ecbebae2dc3d40%3Azc6abngv">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/voicedebrief/index.html"><b>VoiceDebrief</b></a><br><span class="dim small"><code>k6xy9z4d</code> · structured analysis</span></td><td>92</td><td>1.2 MB</td><td>18</td><td>4 apps</td><td><b class="no">no</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_31e8196d3e83b37277083c29f105b8310dbac4569e22715b5e0f85d46878eec1%3Ak6xy9z4d">open →</a></td></tr>
+    <tr><td><a href="https://sgit.ai/demos/vaults/regulation-graph/index.html"><b>Regulation Graph</b></a> <span class="lbl lbl-law">instrument</span><br><span class="dim small"><code>73heuprz</code> · reference data</span></td><td>207</td><td>14.9 MB</td><td>2</td><td>11 app views</td><td><b class="yes">yes</b></td><td><a href="https://dev.vault.sgraph.ai/#sgit_rk1_c004daae386e8d17fa648884acc527018bd4ea1116ad673fb2f1b068011695c9%3A73heuprz">open →</a></td></tr>
+  </tbody>
+</table></div>
+<p>Read keys for all twelve are published in <a href="../agents/vaults.json"><code>/agents/vaults.json</code></a> — prefix-validated before rendering, as the catalogue does.</p>
+
+<h2 id="instrument">The instrument vault</h2>
+<p><b>Regulation Graph</b> (<code>73heuprz</code>) — the EU AI Act. 207 files, 14.9 MB, 1,523 nodes, 1,944 edges, eleven app views. Parsed from official Formex XML retrieved from CELLAR, hash-verified, with a SHA-256 of the retrieved bytes on every node.</p>
+<p class="cred"><span class="pfx">sgit_rk1_</span>c004daae386e8d17fa648884acc527018bd4ea1116ad673fb2f1b068011695c9:<span class="vid">73heuprz</span></p>
+<p><a href="https://dev.vault.sgraph.ai/#sgit_rk1_c004daae386e8d17fa648884acc527018bd4ea1116ad673fb2f1b068011695c9%3A73heuprz">Open it →</a> · <a href="../eu-ai-act/index.html">the instrument folder →</a></p>
+
+<h2 id="layout">What is in an instrument vault</h2>
+<p>The same shape for every instrument, so a tool written once works everywhere:</p>
+<pre class="shell">standards__&lt;instrument-slug&gt;/
+├── PUBLIC.md        what is in here · what the read key grants · what was audited
+├── MANIFEST.json    id, version, amendments composed, build date, source URLs,
+│                    hash of every source file, node/edge counts, contract_version
+├── source/          the retrieved bytes, UNMODIFIED, + .sha256 + RETRIEVAL.md
+├── structure/       the TAXONOMY — the paragraph-as-folder tree
+├── graph/           the ONTOLOGY — nodes.json, edges.json, graph.sqlite, graph.ttl
+├── concepts/        defined terms; one identifier, many labels
+├── crosswalk/       FrameworkReference bridge nodes to other instruments
+├── app/             index.html, _page.json, the views
+└── dist/            &lt;instrument&gt;-v&lt;n&gt;.zip · &lt;instrument&gt;-v&lt;n&gt;.sqlite</pre>
+<p><b>For ISO, <code>source/</code> is empty and <a href="../iso-27001/index.html">the page says why</a>.</b> <a href="../method/index.html#folder">The paragraph-as-folder design →</a></p>
+
+<h2 id="dist">Distribution — specified, and not built</h2>
+<div class="evbox ev-warn"><span class="evtag">Net-new</span>
+<p><b>Not one of the twelve published vaults offers a zip or a file export.</b> Two things resemble it and are not it: Regulation Graph's RDF/Turtle export is an in-app graph serialisation, and pki.sgit.ai's briefing-pack zip is a static site pack. Vault-level export is net-new work across the entire estate.</p>
+<p>What is specified, and what each is for:</p>
+<div class="dl">
+  <div><p><b><code>&lt;instrument&gt;-v&lt;n&gt;.zip</code></b> — the whole vault as plain folders and files. Offline, greppable, archivable by a third party, no key needed once downloaded. <b>This is the answer to the verification objection and the delivery mechanism at the same time.</b></p></div>
+  <div><p><b><code>&lt;instrument&gt;-v&lt;n&gt;.sqlite</code></b> — the graph as a queryable file. Loads in DuckDB, in <code>sql.js</code> in a browser, in Python, in anything.</p></div>
+</div>
+<p style="margin-top:.8rem"><b>Versioned. Never overwritten.</b> A standards corpus that silently changes under a fixed filename is worse than no corpus — and the amendment history <em>is</em> the product.</p></div>
+
+<h2 id="fork">The architectural fork, published unresolved</h2>
+<p>The commissioning memo said the vaults hold everything and the website is a projection. A later internal brief changed position — <em>“vault authors, repo publishes”</em> — on one ground:</p>
+<p class="claim">Clear text is what enables verification.</p>
+<p>That objection is real and it cuts. Ciphertext that decrypts in a browser with a published key is <em>readable</em>, but it is not greppable, diffable, archivable by a third party, or citable by a URL that will resolve in ten years. A standards site's entire value is that a claim can be checked.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th>Vault</th><th class="safe">Repo / static site</th></tr></thead>
+  <tbody>
+    <tr><td><b>Holds</b></td><td>Everything — source bytes, transformations, model outputs, JSON, SQLite, apps, tools</td><td>The projection: rendered pages, the raw markdown of this site's own writing, the graph as plain files</td></tr>
+    <tr><td><b>Is the</b></td><td><b>Working substrate and distribution unit</b></td><td><b>Verification surface and citable address</b></td></tr>
+    <tr><td><b>Optimised for</b></td><td>Delivery, versioning, coherence, handing somebody one credential</td><td>Being read, indexed, diffed, forked and cited</td></tr>
+    <tr><td><b>Authority</b></td><td>Canonical for data</td><td>Canonical for URLs</td></tr>
+  </tbody>
+</table></div>
+<p>Both, with a stated division of labour, and the governing rule at the top of this page. <a href="../admin/comms.html#open">Q2 — published as a fork rather than settled →</a></p>
+
+<div class="evbox ev-warn"><span class="evtag">Durability risk</span><p><b>Both hosts are <code>dev.</code>-prefixed.</b> The viewer and the ciphertext API. For a site whose proposition is durable citation, depending on infrastructure named <em>dev</em> is worth naming now rather than discovering later — and the <code>dist/</code> exports that would let a third party archive an instrument independently do not exist yet. <a href="../method/citation.html#dead">What the citation scheme does not fix →</a></p></div>
+
+<div class="pagenav"><a href="../subsets/agentic-access/index.html">← Agentic access</a> <a href="keys.html">Key discipline →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

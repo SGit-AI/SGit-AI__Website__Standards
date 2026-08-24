@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For agents — the machine surface · standards.sgit.ai</title>
+<meta name="description" content="JSON endpoints for the grammar, the instruments and the vault estate, each with a contract version to refuse on; five reading rules; what null means; and the epistemic rule: an agent may report which provision a claim points at, and may not report that a requirement is met.">
+<link rel="canonical" href="https://standards.sgit.ai/agents/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="standards.sgit.ai">
+<meta property="og:url" content="https://standards.sgit.ai/agents/index.html">
+<meta property="og:title" content="For agents — the machine surface">
+<meta property="og:description" content="An agent may report which provision a claim points at. It may not report that a requirement is met. Plus versioned JSON endpoints and the rule that a null here is a stated absence, not missing data.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl here" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / agents</div>
+<h1>For agents</h1>
+<p class="lead">The machine surface. Agents are half the audience for a site like this, and an agent that has to scrape thirty HTML pages to answer one question will scrape them wrong. So the grammar, the instruments and the estate are served as JSON, with a contract version to refuse on and one epistemic rule that is not negotiable.</p>
+
+<h2 id="rule">The rule</h2>
+<p class="claim">An agent may report which provision a claim points at. It may not report that a requirement is met.</p>
+<p>That is the difference between evidence and a compliance verdict, and this project draws it four separate times in its own words. Concretely, for anything reading this site:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th class="safe">In scope</th><th class="fatal">Out of scope</th></tr></thead>
+  <tbody>
+    <tr><td>“This claim points at Article 26(6), positional hash <code>2d9c2cb6ef0892ae</code>”</td><td>“This organisation complies with Article 26(6)”</td></tr>
+    <tr><td>“Retention is recorded as 30 days; the provision states a minimum of six months; the comparison is arithmetic”</td><td>“Compliance score: 68%”</td></tr>
+    <tr><td>“Five of the nine questions have no evidence attached”</td><td>“Five minor gaps remain”</td></tr>
+    <tr><td>“No crosswalk exists between these two instruments”</td><td>“These two requirements are equivalent”</td></tr>
+  </tbody>
+</table></div>
+<p>The right-hand column is not forbidden because it is rude. It is forbidden because <b>nothing on this site can ground it</b> — there is no measure, no twin, no evidence path — and a statement that cannot be grounded is exactly what <a href="../method/ladder.html">the grounding ladder</a> exists to make impossible to produce accidentally.</p>
+
+<h2 id="endpoints">Endpoints</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Endpoint</th><th>What it carries</th><th>Contract</th></tr></thead>
+  <tbody>
+    <tr><td><a href="grammar.json"><code>/agents/grammar.json</code></a></td><td>Node types, edge types, the established set, the governance rule, the identity fields, the taxonomy/ontology split, and the bridge shape. <b>Node types are marked instantiated or not</b> — two are not</td><td><code>standards.sgit.ai/grammar/v1</code></td></tr>
+    <tr><td><a href="../eu-ai-act/eu-ai-act.json"><code>/eu-ai-act/eu-ai-act.json</code></a></td><td>The instrument: identity, amendments composed, graph counts, vault, citation scheme, every provision with both hashes, and <b>an explicit list of known weaknesses</b></td><td><code>standards.sgit.ai/instrument/v1</code></td></tr>
+    <tr><td><a href="vaults.json"><code>/agents/vaults.json</code></a></td><td>The twelve published vaults with read keys, the delivery mechanism, and the estate-level facts — one instrument vault, zero zip exports, PUBLIC.md on 2 of 12</td><td><code>standards.sgit.ai/vaults/v1</code></td></tr>
+    <tr><td><a href="../llms.txt"><code>/llms.txt</code></a> · <a href="../llms-full.txt"><code>/llms-full.txt</code></a></td><td>The site in prose, short and long</td><td>—</td></tr>
+    <tr><td><a href="../sitemap.xml"><code>/sitemap.xml</code></a></td><td>Every page</td><td>—</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="reading">Five reading rules</h2>
+<ol class="order">
+  <li><b>Version the contract, not just the data.</b> Every endpoint carries a <code>contract_version</code>. Declare which you speak and <b>refuse politely</b> rather than silently misreading a newer shape.</li>
+  <li><b>Address by positional hash, never by array index or display label.</b> The order of <code>provisions[]</code> is not a promise. Labels are translations.</li>
+  <li><b>Never hold a write key.</b> A read key, or a downloaded zip. <a href="../vaults/keys.html">Key discipline →</a></li>
+  <li><b>If you compute, say what you computed from.</b> Every number carries the provision it derives from and the hash of that provision's text.</li>
+  <li><b>If you cannot answer, say so visibly.</b> An unanswered question is an output. Ghost it; do not default it, and do not omit it.</li>
+</ol>
+
+<h2 id="null">What <code>null</code> means here, because it means something specific</h2>
+<div class="warnbox"><b>A <code>null</code> in these endpoints is a stated absence, not missing data.</b> Three of them recur and each carries a note beside it:
+<ul style="margin:.6rem 0 0">
+  <li><code>content_hash: null</code> — the operative text has not been re-derived from the authority, so there is nothing honest to hash. <a href="../eu-ai-act/status.html#w1">Why →</a></li>
+  <li><code>text: null</code> — the text is not reproduced on this site, either pending re-derivation (EU law) or because <a href="../iso-27001/index.html">it may not be republished at all</a> (ISO).</li>
+  <li><code>dist.zip: null</code> — not built. On any vault on this estate.</li>
+</ul>
+<p style="margin:.6rem 0 0"><b>Do not treat any of these as a value to fill in from elsewhere.</b> An agent that substitutes a plausible provision text from another source has produced exactly the failure this site was built to prevent — and the staleness probe found that a text circulating in the wild <em>had never been the law at all</em>.</p></div>
+
+<h2 id="stable">What is promised</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Property</th><th>Promise</th></tr></thead>
+  <tbody>
+    <tr><td><b>Provision URLs</b></td><td><code>/&lt;instrument&gt;/provisions/&lt;alias&gt;.html</code>, constructible. <a href="../method/citation.html">The scheme →</a></td></tr>
+    <tr><td><b>Per-instrument JSON</b></td><td><code>/&lt;instrument&gt;/&lt;instrument&gt;.json</code>, constructible from the slug</td></tr>
+    <tr><td><b>Positional hashes</b></td><td>Recomputable: <code>sha256('&lt;slug&gt;/&lt;alias&gt;')[:16]</code>. Verify one rather than trusting it</td></tr>
+    <tr><td><b>Raw markdown</b></td><td>Source documents at <code>/briefs/&lt;filename&gt;.md</code>, and the front page at <code>/index.md</code></td></tr>
+    <tr><td><b>Instrument labelling</b></td><td>Every instrument page carries a LAW / STANDARD / FRAMEWORK label and a republishable mark in its header. <b>CI fails the build if one does not</b></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="ask">If you are an agent reading this on somebody's behalf</h2>
+<p>The most useful thing you can report from this site is usually <b>what it does not have</b>. There are zero crosswalks, no GDPR graph, no control catalogue in any machine-readable form, no file exports, and the AI Act readings are secondarily sourced and flagged as such. A summary that omits those is a worse summary. <a href="../shipped/index.html">The gap list, unsoftened →</a></p>
+
+<div class="pagenav"><a href="../tools/resolver.html">← The resolver</a> <a href="../shipped/index.html">What is shipped →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

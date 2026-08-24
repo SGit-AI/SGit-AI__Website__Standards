@@ -1,0 +1,116 @@
+{
+  "contract_version": "standards.sgit.ai/grammar/v1",
+  "generated": "2026-08-24",
+  "source": "https://standards.sgit.ai/method/grammar.html",
+  "licence": "CC BY 4.0",
+  "node_types": [
+    {
+      "type": "Provision",
+      "what": "An article, paragraph or point, carrying its source reference",
+      "instantiated": true
+    },
+    {
+      "type": "Definition",
+      "what": "A term the instrument defines for its own purposes",
+      "instantiated": true
+    },
+    {
+      "type": "Requirement",
+      "what": "Something that must be the case",
+      "instantiated": true
+    },
+    {
+      "type": "Obligation",
+      "what": "Something a named actor must do",
+      "instantiated": true
+    },
+    {
+      "type": "Prohibition",
+      "what": "Something that must not be done; kept separate from a negated Obligation because they behave differently under exemption",
+      "instantiated": true
+    },
+    {
+      "type": "Control",
+      "what": "A measure that satisfies a requirement",
+      "instantiated": false,
+      "note": "Proposed and never instantiated anywhere in this corpus."
+    },
+    {
+      "type": "Actor",
+      "what": "The roles the instrument itself defines - provider, deployer, importer, notified body. Not organisations",
+      "instantiated": true
+    },
+    {
+      "type": "Amendment",
+      "what": "A change to an instrument, as a node in its own right rather than a property of what it changes",
+      "instantiated": true
+    },
+    {
+      "type": "FrameworkReference",
+      "what": "The crosswalk bridge node of the ontologies-of-ontologies model",
+      "instantiated": false,
+      "note": "Specified and never built. Zero crosswalks exist on this site."
+    }
+  ],
+  "edge_types": {
+    "structural": [
+      "defines",
+      "defined_in",
+      "applies_to",
+      "triggers",
+      "exempts",
+      "references",
+      "satisfied_by",
+      "in_scope_when"
+    ],
+    "amendment": [
+      "amends",
+      "substitutes",
+      "inserts",
+      "deletes",
+      "repealed_by",
+      "effective_from",
+      "references"
+    ],
+    "established": [
+      "connected_to",
+      "observed_on",
+      "backed_by",
+      "measured_by",
+      "grants",
+      "reaches",
+      "enables",
+      "exposes",
+      "gives_rise_to",
+      "protected_by",
+      "conditional_on",
+      "defeated_by",
+      "owned_by",
+      "accepted_by",
+      "underwritten_by"
+    ]
+  },
+  "governance_rule": "Where an established edge already fits, use it. A new edge type requires an argument for why no established one fits.",
+  "identity": {
+    "canonical_id": "positional_hash",
+    "positional_hash": "sha256('<instrument-slug>/<alias>') truncated to 16 hex characters. Derived from the ADDRESS. Stable across amendment. This is what a citation and a crosswalk attach to.",
+    "content_hash": "sha256 of the provision text. Derived from the TEXT. Moves on amendment - which is the amendment signal.",
+    "alias": "A zero-padded human-readable projection of the positional address, e.g. art-026-para-05.",
+    "rule": "Address by positional hash, never by array index or display label. Labels are translations; array positions are an accident of parsing. Both failure modes are silent."
+  },
+  "taxonomy_ontology_split": "Structural containment (bullet -> paragraph -> article -> chapter -> instrument) and semantic relationship (concepts, obligations, external terms) are NOT the same kind of edge. Modelling both as one graph makes a query for what an article contains return concepts, and a query for what a concept relates to return paragraph numbers.",
+  "bridge_shape": {
+    "required_fields": [
+      "from",
+      "to",
+      "relation",
+      "basis",
+      "strength",
+      "asserted_by",
+      "asserted_at",
+      "source_content_hash"
+    ],
+    "strength": "UNDEFINED - no scale exists yet. This blocks the crosswalk browser. Open question Q4.",
+    "attaches_to": "positional_hash, so the bridge survives amendment and can report that the text underneath it moved"
+  }
+}

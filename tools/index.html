@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tools outside the vault — the contract and five tools · standards.sgit.ai</title>
+<meta name="description" content="Three working precedents for tools that read vault data at runtime, the six-file contract and five rules that keep a tool from coupling to one vault's internals, and five tools ranked by value over effort — one of which is shipped.">
+<link rel="canonical" href="https://standards.sgit.ai/tools/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="standards.sgit.ai">
+<meta property="og:url" content="https://standards.sgit.ai/tools/index.html">
+<meta property="og:title" content="Tools outside the vault that consume vault materials">
+<meta property="og:description" content="The standard is data in the vault; the tool is code that reads it. Three working precedents, a versioned contract, and the prohibition that no metered capability sits behind a published read key.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl here" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / tools</div>
+<h1>Tools outside the vault</h1>
+<p class="lead">Tools that live outside a vault and read its materials at runtime. This was raised as something worth exploring; it is better than that — <b>the pattern already exists on this estate, it works, and there are three shipped precedents.</b> What is missing is not the technique. It is a contract, so that every tool does not end up coupled to one vault's internals.</p>
+
+<h2 id="precedent">The precedent, and it is nearly exact</h2>
+<div class="note"><b>Private Health Score</b> (vault <code>zc6abngv</code>, 35 files) loads <em>“a versioned JSON standard — five dimensions, five bands, eight scoring rules — from the vault at runtime”</em> and computes deterministic results, <b>separating rule-derived numbers from model-generated prose</b>.
+<p style="margin:.6rem 0 0">Read that again with <em>standard</em> meaning ISO rather than health. <b>The standard is data in the vault; the tool is code that reads it.</b> That is precisely the shape a conformance tool needs, and it is already built and working.</p></div>
+<p>Two more:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Precedent</th><th>What it demonstrates</th></tr></thead>
+  <tbody>
+    <tr><td><b>Risk Graph Explorer</b> (<code>3simlnqe</code>)</td><td>Vault data as live computation. Answering questions recomputes seven views simultaneously; the same questions answered differently yield different graphs. Amber edges are exposure, green is assurance, <b>ghosted is unanswered</b>. Zero network calls, empty permissions</td></tr>
+    <tr><td><b>Regulation Graph's SQL and RDF views</b></td><td>An instrument queried as a database via <code>sql.js</code>, and as a triple store with Turtle export. The graph is already addressable by two query languages</td></tr>
+  </tbody>
+</table></div>
+<p>Three working precedents. This is established practice waiting to be pointed at standards.</p>
+
+<h2 id="contract">The contract between a tool and a vault</h2>
+<p>Read this and only this. A tool that reaches past it is coupled to one vault's internals and will break on the next one:</p>
+<pre class="shell">MANIFEST.json          instrument id, version, amendments, build date, counts
+graph/nodes.json       stable node ids (positional hashes)
+graph/edges.json       typed edges from the published grammar
+graph/graph.sqlite     the same graph, queryable
+concepts/*.json        defined terms; one identifier, many labels
+crosswalk/*.json       FrameworkReference bridges</pre>
+
+<h3>The five rules</h3>
+<ol class="order">
+  <li><b>Version the contract, not just the data.</b> <code>MANIFEST.json</code> carries a <code>contract_version</code>. A tool declares which version it speaks and <b>refuses politely</b> rather than silently misreading a newer shape.</li>
+  <li><b>Address by positional hash, never by array index or display label.</b> Labels are translations; array positions are an accident of parsing. <a href="../method/index.html#hashes">Both failure modes are silent</a>, which is why this is a rule.</li>
+  <li><b>A tool never holds a write key.</b> A read key, or a downloaded zip. <a href="../vaults/keys.html">Key discipline →</a></li>
+  <li><b>A tool that computes must say what it computed from.</b> Every number carries the provision it derives from and the hash of that provision's text. <em>Computed, not claimed.</em></li>
+  <li><b>A tool that cannot answer must say so visibly.</b> Both shipped precedents ghost unanswered nodes rather than defaulting them. <a href="../method/ladder.html#r2">An unanswered question is an output →</a></li>
+</ol>
+<div class="warnbox"><b>And one prohibition: no metered capability behind a published read key.</b> A published key is handed to everybody, so anything it can spend, everybody can spend. <a href="../vaults/keys.html#metered">The rule, and the estate's own example →</a></div>
+
+<h2 id="five">Five tools, ranked by value over effort</h2>
+
+<h3 id="t1">T1 — The crosswalk browser <span class="dim">· build first</span></h3>
+<p>Pick a provision in instrument A; see every provision in B, C and D that bridges to it, with each bridge's basis and strength. Reads <code>crosswalk/*.json</code> across every instrument vault.</p>
+<p><b>Why first:</b> it is the thing a multi-standard site sells, it is the only tool that gets <em>more</em> valuable with each instrument added, and it makes <a href="../method/crosswalks.html#compounding">the compounding argument</a> visible rather than asserted.</p>
+<div class="evbox ev-warn"><span class="evtag">Blocked</span><p><b>Zero crosswalks exist</b>, so T1 would currently render an empty screen. It cannot be faked, which is a virtue. <b>T1 is the reason to write the first bridge.</b> <a href="../method/crosswalks.html#before">Five preconditions, one met →</a></p></div>
+
+<h3 id="t2">T2 — The conformance calculator</h3>
+<p>Answer questions about your situation; get findings that each point at a named provision. A direct descendant of Private Health Score and Risk Graph Explorer.</p>
+<div class="warnbox"><b>This tool carries a standing framing warning in its own header, and it is non-negotiable.</b> It outputs <b>findings and unanswered questions. Never a score. Never a pass.</b>
+<p style="margin:.6rem 0 0">The model is <a href="../eu-ai-act/worked-example.html#v1">the worked example's V1</a> — <em>thirty days against six months is arithmetic, not judgement</em> — published alongside its own caveat, <em>“most obligations are not that crisp, and the graph must not imply they are.”</em> A tool that reported a percentage would be asserting exactly what this site exists to stop being asserted. <a href="../method/ladder.html#not">Why →</a></p></div>
+
+<h3 id="t3">T3 — The amendment differ</h3>
+<p>Two versions of an instrument in, changed provisions out — <b>by content hash, so it is exact rather than textual</b>. This is the tool that makes the site a living resource rather than a snapshot, and it directly fixes <a href="../eu-ai-act/status.html#w2">the flagship vault's two-commits-no-history gap</a>.</p>
+<p><b>Blocked on data, not code:</b> it needs two versions of an instrument in the vault to compare, and the AI Act vault composes its amendment in rather than storing the pre-amendment text as its own version.</p>
+
+<h3 id="t4">T4 — The provision citation resolver <span class="tstat t-done">shipped</span></h3>
+<p>A stable URL per provision that resolves to the text, the hashes, the retrieval record and every crosswalk touching it. <b>Small, and it unblocks everything else</b> — every bridge is a pair of citations, so nothing else can be built without it.</p>
+<p><a href="resolver.html">Open the resolver →</a> · <a href="../method/citation.html">the scheme it implements →</a></p>
+
+<h3 id="t5">T5 — Cross-vault search</h3>
+<p>Each vault is currently an island; the catalogue indexes them and does not search inside them. A prebuilt search index per vault plus a federated client-side query. <b>Hardest of the five</b>, and the one most likely to want a real backend. Defer until instrument four.</p>
+
+<h2 id="where">Where a tool lives</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Thing</th><th>Where</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td><b>The tool's code</b></td><td><b>In this repository</b>, rendered on this site</td><td>It is small, it must be inspectable, and that is the <em>clear text enables verification</em> argument applied to the tools rather than only to the data</td></tr>
+    <tr><td><b>The data it reads</b></td><td><b>In the vault</b></td><td>Bulky, versioned, and the delivery unit</td></tr>
+    <tr><td><b>A vault-internal copy of the tool</b></td><td><b>Yes, for flagship instruments</b></td><td>So a downloaded zip is self-sufficient offline. Accept the duplication; build both from one source</td></tr>
+  </tbody>
+</table></div>
+<p>That split gives three delivery modes from one build — a page on this site, an app inside the vault, and a zip that works with no network. <b>Which is the delivery-mechanism claim actually delivered</b>, rather than described.</p>
+
+<div class="pagenav"><a href="../vaults/keys.html">← Key discipline</a> <a href="resolver.html">The resolver →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

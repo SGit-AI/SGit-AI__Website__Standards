@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agentic access — the provisions across eight instruments · standards.sgit.ai</title>
+<meta name="description" content="What eight instruments require of an organisation that lets an autonomous agent hold credentials and act on real systems: the EU AI Act, GDPR, NIS2, DORA, HIPAA, ISO/IEC 27001, NIST and the OWASP/MITRE agentic layer — with the three divergences a merged view would hide.">
+<link rel="canonical" href="https://standards.sgit.ai/subsets/agentic-access/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="standards.sgit.ai">
+<meta property="og:url" content="https://standards.sgit.ai/subsets/agentic-access/index.html">
+<meta property="og:title" content="Agentic access across eight instruments">
+<meta property="og:description" content="Six shared ideas, eight instruments, and three divergences that catch people: four different reporting clocks, three different things called access control, and only one instrument that is about the agent's autonomy at all.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../../method/grammar.html">The grammar</a>
+      <a class="sl" href="../../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../subsets/index.html">The subset method</a>
+      <a class="sl here" href="../../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../vaults/index.html">The vaults</a>
+      <a class="sl" href="../../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../agents/index.html">For agents</a>
+      <a class="sl" href="../../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../network/index.html">The network</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">standards.sgit.ai</a> / <a href="../index.html">subsets</a> / agentic-access</div>
+<h1>Agentic access</h1>
+<p class="lead">One problem: an organisation lets an autonomous agent hold credentials and act on real systems. Eight instruments bear on it, none of them was written with it in mind, and no single one of them answers it. This is the subset — what each requires, where they overlap, and where they diverge in ways that matter.</p>
+
+<div class="note"><b>Read the limit first.</b> One of these eight instruments is modelled on this site. The other seven are <b>cited, not modelled</b> — the rows below carry real citations and this project's own readings, and nothing here recomputes when one of those instruments changes. <a href="../index.html#ship">Why it is published anyway →</a></div>
+
+<h2 id="table">The eight</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Instrument</th><th>Kind</th><th>What it asks of agentic access</th><th>Modelled here?</th></tr></thead>
+  <tbody>
+    <tr><td><b><a href="../../eu-ai-act/index.html">EU AI Act</a></b></td><td><span class="lbl lbl-law">Law</span></td><td>Human oversight that can <em>intervene and stop</em> (Art. 14); logging with a retention minimum (<a href="../../eu-ai-act/provisions/art-026-para-06.html">Art. 26(6)</a>); suspension <em>and</em> notification on a relevant condition (<a href="../../eu-ai-act/provisions/art-026-para-05.html">Art. 26(5)</a>) — where the system is high-risk</td><td><b class="yes">Yes</b></td></tr>
+    <tr><td><b><a href="../../gdpr/index.html">GDPR</a></b></td><td><span class="lbl lbl-law">Law</span></td><td>A lawful basis for the processing the agent performs; data minimisation (Art. 5(1)(c)); security appropriate to the risk (Art. 32); and Art. 22 where the agent's action is a solely automated decision with legal or similarly significant effect</td><td><b class="no">No</b> — cited</td></tr>
+    <tr><td><b>NIS2</b><br><span class="dim small">Directive (EU) 2022/2555</span></td><td><span class="lbl lbl-law">Law</span></td><td>Risk-management measures covering access control and asset management; supply-chain security for the tooling the agent runs on; incident reporting on its own clock</td><td><b class="no">No</b> — cited</td></tr>
+    <tr><td><b>DORA</b><br><span class="dim small">Regulation (EU) 2022/2554</span></td><td><span class="lbl lbl-law">Law</span></td><td>ICT third-party risk with contractual specificity — an agent supplied by a vendor is an ICT service, and DORA is unusually prescriptive about what the contract must say</td><td><b class="no">No</b> — cited</td></tr>
+    <tr><td><b>HIPAA Security Rule</b></td><td><span class="lbl lbl-law">Law</span></td><td>Access control, unique user identification, and audit controls — where the agent touches protected health information. Unique identification is the one that agentic access most often breaks</td><td><b class="no">No</b> — cited</td></tr>
+    <tr><td><b><a href="../../iso-27001/index.html">ISO/IEC 27001:2022</a></b></td><td><span class="lbl lbl-std">Standard</span></td><td>Annex A 5.15 access control, 5.16 identity management, 5.17 authentication information, 8.2 privileged access rights, 5.19–5.22 supplier relationships. <b>Clause references only — the text is not reproducible</b></td><td><b class="no">No</b> — referenced</td></tr>
+    <tr><td><b>NIST</b><br><span class="dim small">CSF 2.0 · SP 800-53</span></td><td><span class="lbl lbl-fwk">Framework</span></td><td>The AC and IA control families; CSF's PR.AA outcomes. <b>Its value here is as a crosswalk target</b> — everybody maps to NIST, which is what it is for</td><td><b class="no">No</b> — cited</td></tr>
+    <tr><td><b>OWASP / MITRE agentic layer</b><br><span class="dim small">Agentic Top 10 · NHI Top 10 · ATLAS</span></td><td><span class="lbl lbl-fwk">Framework</span></td><td>The only layer written <em>for</em> this problem rather than adapted to it: excessive agency, non-human identity sprawl, credential reuse across agents, and the adversarial techniques that exploit them</td><td><b class="no">No</b> — cited. <b>CC-licensed, so it is the easiest of the seven to model next</b></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="through">The throughline</h2>
+<blockquote class="challenge">The throughline across all of them is the same small set of ideas: <b>least privilege, data minimisation, access control, supply-chain and third-party risk, traceable evidence, and accountability.</b></blockquote>
+<p>Six ideas, eight instruments. An organisation doing those six things well is in a defensible position under most of them at once — which is the reassuring half.</p>
+
+<h2 id="diverge">And where they diverge, which is the half that catches people</h2>
+<div class="warnbox"><b>Six shared ideas do not mean six shared obligations.</b> Three divergences that a merged view would hide, and a bridged one shows:
+<ul style="margin:.6rem 0 0">
+  <li><b>The clocks are different.</b> NIS2, DORA, GDPR and the AI Act each impose their own reporting timing on their own trigger, to their own addressee. One incident involving an agent can start four clocks at four different moments, and satisfying the earliest does not satisfy the others.</li>
+  <li><b>“Access control” is not one requirement.</b> HIPAA's <em>unique user identification</em> is a specific and awkward demand where a fleet of agents shares a service account. ISO/IEC 27001 Annex A 8.2 is about privileged access as a category. NIST's AC family is a menu with a baseline. These are three different obligations that share a phrase.</li>
+  <li><b>Only one of the eight is about the agent's <em>autonomy</em>.</b> Seven treat the agent as a system with credentials. The AI Act's human-oversight provisions treat it as something that acts — and the OWASP agentic material is the only framework written for that case. <b>An organisation compliant with the other seven can still have no answer to “can a human stop it, and has anyone tried”</b>.</li>
+</ul></div>
+
+<h2 id="q10">The question this subset exists to make askable</h2>
+<p class="claim">Can a human meaningfully oversee it, intervene in it, and stop it — and has anyone tested that?</p>
+<p>It is the plug question from <a href="../../eu-ai-act/index.html#questions">the AI Act operator set</a>, and the second half is what makes it useful. An oversight path in a design document is not an oversight path; it is an untested claim about one. Across all eight instruments this is the question with the fewest evidenced answers, which under <a href="../../method/ladder.html#r1">this site's own rule</a> makes it the most important output rather than the least.</p>
+
+<h2 id="next">What would make this a real subset</h2>
+<ol class="order">
+  <li><b>Model OWASP next.</b> Deep, already public, CC-licensed — no copyright problem at all — and it is the only one of the seven written for this problem. <a href="../../instruments/index.html#candidates">Build order 5 →</a></li>
+  <li><b>Write one crosswalk.</b> Any pair. Until one bridge exists this table is a list rather than a view. <a href="../../method/crosswalks.html#before">The five preconditions →</a></li>
+  <li><b>Give bridges a strength.</b> A crosswalk that can only say <em>yes</em> cannot express “partially, and here is why” — which is the honest answer for most of the rows above. <a href="../../admin/comms.html#open">Q4 →</a></li>
+</ol>
+
+<div class="pagenav"><a href="../index.html">← The subset method</a> <a href="../../vaults/index.html">The vaults →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.2</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../../method/index.html">How a regulation becomes a graph</a>
+    <a href="../../method/grammar.html">The grammar</a>
+    <a href="../../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../../method/citation.html">The citation scheme</a>
+    <a href="../../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../../instruments/index.html">Every instrument</a>
+    <a href="../../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../../gdpr/index.html">GDPR</a>
+    <a href="../../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../../iso-31000/index.html">ISO 31000</a>
+    <a href="../../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../../vaults/index.html">The vaults</a>
+    <a href="../../vaults/keys.html">Key discipline</a>
+    <a href="../../tools/index.html">Tools outside the vault</a>
+    <a href="../../agents/index.html">For agents</a>
+    <a href="../../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../network/index.html">The network</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

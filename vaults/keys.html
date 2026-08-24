@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Key discipline — read keys yes, write keys never · standards.sgit.ai</title>
+<meta name="description" content="Two prefixes and only one is ever published, what this repository's CI enforces on every push, why escrowing a write key is a precondition of publishing rather than good practice, the keys vault policy, and the open question about whether an exposed key was rotated or only removed.">
+<link rel="canonical" href="https://standards.sgit.ai/vaults/keys.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">standards<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer that holds the instrument vaults this site projects">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">one instrument modelled</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../method/index.html">The method<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../method/index.html">How a regulation becomes a graph</a>
+      <a class="sl" href="../method/grammar.html">The grammar</a>
+      <a class="sl" href="../method/crosswalks.html">Bridges, not merges</a>
+      <a class="sl" href="../method/citation.html">The citation scheme</a>
+      <a class="sl" href="../method/ladder.html">The grounding ladder</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../instruments/index.html">Instruments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../instruments/index.html">Every instrument</a>
+      <a class="sl" href="../eu-ai-act/index.html">EU AI Act</a>
+      <a class="sl" href="../gdpr/index.html">GDPR</a>
+      <a class="sl" href="../iso-27001/index.html">ISO/IEC 27001</a>
+      <a class="sl" href="../iso-31000/index.html">ISO 31000</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../subsets/index.html">Subsets<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../subsets/index.html">The subset method</a>
+      <a class="sl" href="../subsets/agentic-access/index.html">Agentic access</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../vaults/index.html">Vaults &amp; tools<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../vaults/index.html">The vaults</a>
+      <a class="sl here" href="../vaults/keys.html">Key discipline</a>
+      <a class="sl" href="../tools/index.html">Tools outside the vault</a>
+      <a class="sl" href="../tools/resolver.html">The citation resolver</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../agents/index.html">For agents</a>
+      <a class="sl" href="../shipped/index.html">What is actually shipped</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../network/index.html">The network</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__Standards">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">standards.sgit.ai</a> / <a href="index.html">vaults</a> / keys</div>
+<h1>Key discipline</h1>
+<p class="lead">A site about normative instruments that is careless with its own credentials has argued against itself before a reader reaches the second page. This page states the rules, the reason each exists, what this repository's CI enforces, and the one open question that should be answered before another vault publishes.</p>
+
+<h2 id="two">Two prefixes, and only one of them is ever published</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th class="safe">Read key</th><th class="fatal">Write key</th></tr></thead>
+  <tbody>
+    <tr><td><b>Prefix</b></td><td><code>sgit_rk1_</code></td><td><code>sgit_vk1_</code></td></tr>
+    <tr><td><b>Grants</b></td><td>Read</td><td><b class="no">Read and write</b></td></tr>
+    <tr><td><b>Published?</b></td><td><b class="yes">Yes, on purpose.</b> Every one on <a href="index.html">the vaults page</a> is a capability handed out deliberately</td><td><b class="no">Never. Anywhere. Ever.</b> Publishing one hands the vault to anybody</td></tr>
+    <tr><td><b>Reversible?</b></td><td>A published read key <b>cannot be turned back into a write key</b> — a property of the scheme, not a policy</td><td>—</td></tr>
+    <tr><td><b>Shape</b></td><td>Exactly 64 hex characters after the prefix</td><td>—</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="ci">What this repository's CI enforces</h2>
+<p>Every push to <code>dev</code> runs <code>admin/build/validate.js</code> before anything is tagged or deployed. Three of its checks are about keys, and a failure stops the release — no tag, no publish. The rule they enforce is not <em>never mention the write prefix</em>; it is <b>the prefix may be discussed, key material may not exist</b>:</p>
+<div class="cards">
+  <div class="card"><span class="tag">1</span><h3>No write-key material, anywhere</h3><p>The <em>prefix</em> may appear in prose — this page could not exist otherwise, and a check that fired on every mention would be switched off within a week. What may not appear is <b>key material after it</b>: eight or more key-shaped characters following the write prefix fails the build, in any file, always.</p></div>
+  <div class="card"><span class="tag">2</span><h3>Read keys must be well formed</h3><p>Key material after <code>sgit_rk1_</code> must be exactly 64 hex characters. A published read key is deliberate and safe; a malformed one usually means somebody pasted the wrong thing, and the wrong thing is what you want CI to notice.</p></div>
+  <div class="card"><span class="tag">3</span><h3>The generic credential shape</h3><p>A long passphrase joined by a colon to a UUID-shaped identifier — inherited from <a href="https://pki.sgit.ai">pki.sgit.ai</a>, whose pipeline this one is ported from. Two sites, one class of mistake.</p></div>
+</div>
+<p>The check is deliberately in the <em>pre-release gate</em> rather than a post-publish scan, for the reason in the next section.</p>
+
+<h2 id="audit">Audit before the key, not after</h2>
+<p class="claim">Revocation cannot retroactively protect ciphertext somebody already fetched.</p>
+<p>This is the rule that determines <em>when</em> every other check runs. Once a read key is published and the ciphertext has been served, rotating the key does not un-serve it. Anybody who fetched the encrypted objects while the key was public holds a permanent copy they can still decrypt. <b>So the audit happens before publication, not after an incident</b> — and a scan of the working tree is not enough, because the one disclosed incident on this estate was a key in <em>history</em>.</p>
+
+<h2 id="escrow">Escrow is a precondition of publishing, not good practice</h2>
+<div class="warnbox"><b>A vault that is readable and unwritable is not damaged. It is frozen.</b> Permanently readable by anybody holding the published read key, never updatable, never revocable, never correctable.
+<p style="margin:.6rem 0 0">For a standards site that is the worst possible outcome. Instruments get amended — the amendment is the entire business argument — and an instrument vault that cannot be updated is <b>a permanently wrong copy of the law with your name on it</b>, readable by everyone, forever. There is no key recovery in this system, so a lost write key is final.</p>
+<p style="margin:.6rem 0 0">Which makes escrowing the write key <b>a precondition of publishing a read key</b>, and the keys vault the escrow. <a href="#kv">Below →</a></p></div>
+
+<h2 id="kv">The keys vault — the private vault over the vaults</h2>
+<p>Its existence and its policy are published here. <b>Nothing else about it is</b>, and that is the point of the page.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th>Keys vault (private)</th><th>The Vault Catalogue (public)</th></tr></thead>
+  <tbody>
+    <tr><td><b>Holds</b></td><td>Write keys, read keys, and the pre-publication audits</td><td><b>Read keys only</b> — an index of published vaults, rendered live from a vault that indexes vaults, including itself</td></tr>
+    <tr><td><b>Read key</b></td><td><b class="no">Never issued.</b> There is no legitimate reason for one to exist</td><td>Published</td></tr>
+    <tr><td><b>Answers</b></td><td><em>How do I update this?</em></td><td><em>How do I read this?</em></td></tr>
+    <tr><td><b>Failure mode</b></td><td>Catastrophic and estate-wide</td><td>None — it is already public</td></tr>
+  </tbody>
+</table></div>
+
+<h3 id="rules">Five rules it operates under</h3>
+<ol class="order">
+  <li><b>It is a standalone top-level vault, never nested.</b> A sub-vault split is an organisational boundary — lifecycle, sharing, history — and explicitly <em>not</em> a confidentiality boundary from the parent's own readers. Nesting the keys vault under anything published would expose it to that parent's readers.</li>
+  <li><b>No agent ever receives it.</b> An agent that publishes a vault receives one write key, for one vault, scoped to that task. The register is not a credential anybody hands to a session.</li>
+  <li><b>No CI job receives it either.</b> Same rule, and for the same reason.</li>
+  <li><b>Its own recovery lives outside the system it protects.</b> Printed and physical as primary, a hardware-backed password manager as secondary. <b>Not in another vault</b> — that is the recursion with extra steps.</li>
+  <li><b>A write key observed outside it is burned.</b> In a repo, a log, a transcript, a chat, a screenshot — it does not matter which. Create a new vault, migrate the content, republish under a new read key, record both with a rotation date. Do not attempt to un-publish.</li>
+</ol>
+
+<h3 id="recursion">The recursion, which must be answered before the vault is created</h3>
+<div class="warnbox"><b>“A key that will not be shared publicly” is only half a design.</b> The other half is: what happens when <em>that</em> key is lost? There is no key recovery. If the keys vault's write key goes, every vault on the estate becomes frozen simultaneously and permanently — <b>a worse outcome than never having built it</b>.
+<p style="margin:.6rem 0 0">So the recovery document lives outside the vault it protects, the choice of method is stated and dated so that future-you knows which one was actually done rather than which was intended, and <b>the answer is written down before the vault exists</b> rather than after.</p></div>
+
+<h2 id="metered">No metered capability behind a published read key</h2>
+<p>A published read key is handed to everybody, so anything it can spend, everybody can spend. The estate's own example is the right one: the Regulation Graph vault's Article 9 Lab requires a <b>bring-your-own OpenRouter key</b> for its graph REPL, deliberately, so that inference is billed to whoever asked for it rather than to whoever published the vault. Any tool this site ships follows the same rule. <a href="../tools/index.html#contract">The tool contract →</a></p>
+
+<h2 id="open">The open question</h2>
+<div class="evbox ev-warn"><span class="evtag">Q6 — open</span>
+<p><b>Was the exposed vault key rotated, or only removed from history?</b></p>
+<p>The Regulation Graph vault's <code>PUBLIC.md</code> carries visible <code>&lt;VAULT-KEY-REMOVED&gt;</code> and <code>&lt;READ-KEY-REMOVED&gt;</code> markers. A pre-publication audit found its own original write key <b>and another vault's plaintext credential</b> committed in history. Both were redacted, the history rebuilt, and a re-audit from a read-key clone reported 205 files and zero findings.</p>
+<p><b>That was handled correctly and disclosed openly, which is to the project's credit.</b> But the published pages do not say whether the exposed key was <em>rotated</em> or only <em>removed</em> — and by this estate's own doctrine, removal alone does not undo distribution of ciphertext somebody already fetched. This is a question, not a claim of a vulnerability. It should be answered before another vault publishes, and the answer should be the first entry in the keys vault's audit log. <a href="../admin/comms.html#needs">On the comms page as an ask →</a></p></div>
+
+<h2 id="publish">The publishing checklist</h2>
+<ol class="order">
+  <li><b>Audit before the key.</b> Scan history, not just the working tree.</li>
+  <li><b>Escrow the write key</b> into the keys vault. No read key goes on a page until its write key is in the register.</li>
+  <li><b>Write <code>PUBLIC.md</code></b> — what is in here, what the read key grants, what was audited. <b>Currently on 2 of 12 vaults</b>, which is not a convention yet.</li>
+  <li><b>Validate the prefix before rendering</b> any credential on any page.</li>
+  <li><b>No metered capability</b> behind the published key.</li>
+</ol>
+
+<div class="pagenav"><a href="index.html">← The vaults</a> <a href="../tools/index.html">Tools →</a></div>
+</main>
+
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">standards<span>.sgit.ai</span></div>
+    <p>Laws, standards and frameworks as addressable provisions: the method that turns an instrument into a graph, the instruments modelled so far, and the vaults that deliver them. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network. All content CC BY 4.0; the instruments themselves keep their own licences.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project and the vault estate · <a href="https://risks.sgit.ai">↗ risks.sgit.ai</a> — the register and the acceptance decision · <a href="https://graphs.sgit.ai">↗ graphs.sgit.ai</a> — the general theory · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the house pattern · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer these instruments are delivered on — and this is not a compliance product. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The method</h4>
+    <a href="../method/index.html">How a regulation becomes a graph</a>
+    <a href="../method/grammar.html">The grammar</a>
+    <a href="../method/crosswalks.html">Bridges, not merges</a>
+    <a href="../method/citation.html">The citation scheme</a>
+    <a href="../method/ladder.html">The grounding ladder</a>
+  </div>
+  <div>
+    <h4>Instruments</h4>
+    <a href="../instruments/index.html">Every instrument</a>
+    <a href="../eu-ai-act/index.html">EU AI Act</a>
+    <a href="../gdpr/index.html">GDPR</a>
+    <a href="../iso-27001/index.html">ISO/IEC 27001</a>
+    <a href="../iso-31000/index.html">ISO 31000</a>
+    <a href="../subsets/agentic-access/index.html">Agentic access subset</a>
+  </div>
+  <div>
+    <h4>Delivery</h4>
+    <a href="../vaults/index.html">The vaults</a>
+    <a href="../vaults/keys.html">Key discipline</a>
+    <a href="../tools/index.html">Tools outside the vault</a>
+    <a href="../agents/index.html">For agents</a>
+    <a href="../shipped/index.html">What is actually shipped</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../network/index.html">The network</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>
