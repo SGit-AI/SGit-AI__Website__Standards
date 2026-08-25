@@ -5,7 +5,7 @@
 > instrument into a graph of addressable provisions, the instruments modelled that way
 > so far, and the vaults that deliver them. **One instrument is modelled properly. One.**
 
-*Source: <https://standards.sgit.ai/index.html> · site v0.1.3 · markdown twin of the front page.*
+*Source: <https://standards.sgit.ai/index.html> · site v0.1.4 · markdown twin of the front page.*
 
 ---
 

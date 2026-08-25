@@ -48,7 +48,14 @@ nav.site .gh:hover{border-color:var(--accent);text-decoration:none}
    submenu is a shortcut, never the only door. */
 nav.site .ni{position:relative}
 nav.site .ni-has > .nl{display:inline-flex;align-items:center;gap:.25rem}
-nav.site .caret{font-size:.55em;opacity:.55;transition:transform .15s ease}
+/* A CSS-drawn triangle rather than the Unicode glyph it replaces (was &#9662;).
+   The glyph fell back to a plain dot on at least one real system font, which is
+   the risk with any symbol character used as a UI affordance rather than styled
+   as a shape: it renders exactly as intended, or it silently doesn't, and there is
+   no visual signal that it failed. A border-drawn triangle has no font dependency. */
+nav.site .caret{display:inline-block;width:0;height:0;margin-left:.15rem;
+  border-left:3.5px solid transparent;border-right:3.5px solid transparent;
+  border-top:4.5px solid currentColor;opacity:.55;transition:transform .15s ease}
 nav.site .sub{position:absolute;left:-.7rem;top:100%;min-width:12rem;z-index:60;
   background:var(--panel);border:1px solid var(--line);border-radius:10px;
   box-shadow:0 6px 24px rgba(28,29,33,.13);padding:.4rem;

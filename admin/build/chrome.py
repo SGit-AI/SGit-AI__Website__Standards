@@ -132,7 +132,7 @@ def nav_html(rel, up):
         groups.append(
             f'    <div class="ni ni-has">\n'
             f'      <a class="nl{" here" if active else ""}" href="{up}{own}">{label}'
-            f'<span class="caret">&#9662;</span></a>\n'
+            f'<span class="caret"></span></a>\n'
             f'      <div class="sub">\n{links}\n      </div>\n'
             f'    </div>')
     rows = "\n".join(groups)
