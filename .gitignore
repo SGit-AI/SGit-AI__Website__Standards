@@ -9,6 +9,10 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+# ...but the site build tooling is versioned (chrome.py, validate.js, version.txt).
+# Without this negation the stock Python `build/` rule silently swallows admin/build/,
+# `git add -A` skips it without a word, and CI fails on a validator that is not there.
+!admin/build/
 develop-eggs/
 dist/
 downloads/
